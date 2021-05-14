@@ -9,11 +9,12 @@ const getNotes = function (){
 const addNote = function (title,body) {
 
  var notes = loadNotes()
- const duplicatednotes = notes.filter(function(note){
+ notes
+ const duplicatednotes = notes.filter(function (note) {
   return note.title === title
  })
-
- if (duplicatednotes.lengh === 0) {
+ console.log(duplicatednotes.length)
+ if (duplicatednotes.length === 0) {
   notes.push({
    title: title,
    body:body
