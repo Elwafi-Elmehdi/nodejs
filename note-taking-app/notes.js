@@ -2,7 +2,8 @@ const fs = require('fs')
 
 
 const getNotes = function (){
- return "Your Notes..."
+ const notes = loadNotes()
+ console.log(notes)
 }
 
 const addNote = function (title,body) {
@@ -19,7 +20,7 @@ const saveNote = function (notes) {
 
  const dataJSON = JSON.stringify(notes)
  fs.writeFileSync('notes.json',dataJSON)
- 
+
 }
 
 const loadNotes = function () {
