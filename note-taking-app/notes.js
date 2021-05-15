@@ -1,4 +1,5 @@
 const fs = require('fs')
+const chalk = require('chalk')
 
 
 // #########################################################################
@@ -12,7 +13,6 @@ const getNotes = function (){
 
 const removeNote = function (title) {
  var notes = loadNotes()
- notes
  const duplicatednotes = notes.filter(function (note) {
   return note.title === title
  })
@@ -23,9 +23,9 @@ const removeNote = function (title) {
     deletedNote = notes.splice(i,1)
   }
   saveNote(notes)
-  console.log('Note removed : '+ deletedNote.toString())
+  console.log(chalk.red('Note removed : ')+ title)
  }else{
-  console.log('Note does not existe!')
+  console.log(chalk.yellow('Note does not existe!'))
  }
 }
 // #########################################################################
@@ -35,13 +35,14 @@ const findNote = function (title) {
  const duplicatednotes = notes.filter(function (note) {
   return note.title === title
  })
+
  if (duplicatednotes.length !== 0) {
   notes.forEach(element => {
    if(element.title === title)
      console.log(element)
   });
  } else {
-  console.log('Note does not existe!')
+  console.log(chalk.yellow('Note does not existe!'))
  }
 }
 // #########################################################################
@@ -57,9 +58,9 @@ const addNote = function (title,body) {
    body:body
   })
   saveNote(notes)
-  console.log('Note Added')
+  console.log(chalk.green('Note Added'))
  } else {
-  console.log('Note title taken')
+  console.log(chalk.red('Note title taken'))
  }
 
 }

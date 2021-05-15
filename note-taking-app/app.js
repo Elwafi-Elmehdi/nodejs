@@ -1,18 +1,3 @@
-// const fs = require('fs')
-// fs.writeFileSync('notes.txt','Hello I am mehdi and this is my first nodejs script')
-// fs.appendFileSync('notes.txt',' And I am so exited to learn Node!')
-
-// const validator = require('validator')
-// console.log(validator.isEmail('Mehdi@exemple.hehehe'))
-// console.log(chalk.green.inverse('Success!'))
-// // console.log(process.argv)
-
-// var cmd = process.argv[2]
-
-// if (cmd === 'add') {
-//  console.log('Adding a note')
-// }
-const chalk = require('chalk')
 const yargs = require('yargs')
 const notes = require('./notes.js')
 
