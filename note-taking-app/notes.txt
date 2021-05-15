@@ -1,1 +1,0 @@
-Hello I am mehdi and this is my first nodejs script And I am so exited to learn Node!
