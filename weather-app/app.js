@@ -1,16 +1,28 @@
-const request = require('request')
 const geocode = require('./utils/geocode')
 const getweather = require('./utils/getweather')
 const log = console.log
 
-geocode('marrakech',(data,error) => {
- log('Data : ',data)
- log('Error : ',error)
- getweather(data, (data,error) => {
-  log(data)
-  log(error)
+let location = process.argv[2]
+
+if(!location)
+ log('Please entre a location.')
+else{
+ geocode(location,(data,error) => {
+
+  if(error)
+   return log(error)
+  log(data.desc)
+
+  getweather(data, (data,error) => {
+
+   if(error)
+    return log(error)
+   log(data)
+
+  })
  })
-})
+}
+
 
 
 

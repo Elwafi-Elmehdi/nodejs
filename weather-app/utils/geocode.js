@@ -8,23 +8,26 @@ const geocode = (address, callback) => {
  request({ url:url, json:true }, (error,responce) => {
 
   if(error)
+
    callback(undefined,'Unable to connect to the API!')
+
   else if(responce.body.features.length === 0)
+
    callback(undefined,'Unable to find the location!')
+  
   else{
-   const x = responce.body.features[0].center[0]
-   const y = responce.body.features[0].center[1]
-   const desc = responce.body.features[0].place_name
+
+   const {center,place_name} = responce.body.features[0]
 
    const data = {
-     x:x,
-     y:y,
-     desc:desc
+     x:center[0],
+     y:center[1],
+     desc:place_name
    }
+
    callback(data,undefined)
   }
  })
-
 }
 
 module.exports = geocode
