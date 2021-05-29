@@ -1,21 +1,29 @@
+const path = require('path')
 const express = require('express')
 const app = express()
 
+// Paths
+const publicDir = path.join(__dirname,'../public')
+const viewsDir = path.join(__dirname,'../templates')
 
-app.get('/',(req,res)=>{
- res.send('Hello, Express')
-})
 
-app.get('/help',(req,res)=>{
- res.send('Help Page')
+// Serving Static dir
+app.use(express.static(publicDir))
+
+// HBS Templating Express Configuration 
+app.set('view engine','hbs')
+app.set('views',viewsDir)
+
+app.get('',(req,res)=>{
+ res.render('index')
 })
 
 app.get('/about',(req,res)=>{
- res.send('About Page')
+ res.render('about',{msg:'ABout page created by Mehdi Elwafi'})
 })
 
-app.get('/weather',(req,res)=>{
- res.send('Show Weather')
+app.get('/help',(req,res)=>{
+ res.render('help',{desc:'You can contact @mehdi for help'})
 })
 
 app.listen(3000,() => {
