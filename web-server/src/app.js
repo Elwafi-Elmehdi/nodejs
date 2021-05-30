@@ -43,6 +43,21 @@ app.get('/help',(req,res)=>{
  })
 })
 
+// Error Pages
+app.get('/help/*',(req,res)=>{
+  res.render('error',{
+    title:'404',
+    name:'Mehdi',
+    msg:'Help artical not found!'})
+})
+
+app.get('*',(req,res)=>{
+  res.render('error',{
+    title:'404',
+    name:'Mehdi',
+    msg:'Page not found!'})
+})
+
 app.listen(3000,() => {
  console.log("Server is running on port 3000");
 })
