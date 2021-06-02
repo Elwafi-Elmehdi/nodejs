@@ -71,7 +71,7 @@ app.get('/help',(req,res)=>{
  res.render('help',{
   title:'Help',
   name:author,
-  desc:'You can contact @mehdi for help'
+  desc:'You can contact me for help'
  })
 })
 
