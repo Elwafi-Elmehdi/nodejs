@@ -1,8 +1,8 @@
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
-const geocode = require('./geocode')
-const getweather = require('./getweather')
+const geocode = require('./utils/geocode')
+const getweather = require('./utils/getweather')
 
 
 const app = express()
@@ -26,7 +26,6 @@ app.set('view engine','hbs')
 app.set('views',viewsDir)
 
 app.get('',(req,res)=>{
-  // console.log(req.query);
  res.render('index',{
   title:'Weather',
   name:author,
