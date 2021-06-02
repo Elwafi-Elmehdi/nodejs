@@ -9,7 +9,7 @@ let messageTwo = document.querySelector('#msgTwo')
 weatherForm.addEventListener('submit',(e) => {
  e.preventDefault()
  messageOne.textContent = 'Loading...'
- fetch('http://localhost:3000/weather?address='+encodeURIComponent(loc.value)).then((response)=>{
+ fetch('/weather?address='+encodeURIComponent(loc.value)).then((response)=>{
   response.json().then((data)=>{
    if(data.error)
     return messageOne.textContent = data.error
