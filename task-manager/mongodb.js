@@ -1,10 +1,6 @@
 const mongodb = require('mongodb')
 const {MongoClient,ObjectID} = mongodb
 
-const id = new ObjectID()
-
-console.log(id)
-console.log(id.getTimestamp())
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
@@ -13,16 +9,38 @@ MongoClient.connect(connectionURL,{useNewUrlParser:true},(error, client) => {
   if (error)
    return console.log('Unable to connect to db')
   const db = client.db(databaseName)
-  db.collection('users').insertOne({
-   name:'Mohammed',
-   age: 21,
-   _id: id
-  },(error,result)=>{
-    if(error)
-      return console.log('Error')
-    console.log(result.ops)
-    console.log(result.insertedCount)
-  })
+
+  // db.collection('tasks').findOne({_id:new ObjectID("60bac99335ea59444deb24fb")},(error,result)=>{
+  //   console.log(result)
+  // })
+  // db.collection('tasks').find({state:false}).toArray((error,user) =>{
+  //   if(error)
+  //     return console.log(error)
+  //   console.log(user)
+  // })
+
+  // db.collection('users').find({age:21}).count((error,user) =>{
+  //   if(error)
+  //     return console.log(error)
+  //   console.log(user)
+  // })
+
+  // db.collection('users').find({age:21}).limit(5,(error,user) =>{
+  //   if(error)
+  //     return console.log(error)
+  //   console.log(user)
+  // })
+
+  // db.collection('users').insertOne({
+  //  name:'Mohammed',
+  //  age: 21,
+  //  _id: id
+  // },(error,result)=>{
+  //   if(error)
+  //     return console.log('Error')
+  //   console.log(result.ops)
+  //   console.log(result.insertedCount)
+  // })
   // db.collection('users').insertMany([
   //   {
   //     name:"Reda",
