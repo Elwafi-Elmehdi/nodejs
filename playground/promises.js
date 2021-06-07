@@ -1,13 +1,14 @@
-const doWorkCallback = (callback) => {
+const doWorkPromise = new Promise((resolve,reject) => {
  setTimeout(() => {
-  callback('Error',undefined)
+  reject('Things went wrong!')
+  resolve([1,7,4])
  }, 2000);
-}
+})
 
-doWorkCallback((err,res)=> {
- if(err)
-  return console.log(err)
- console.log(res)
+doWorkPromise.then((res)=>{
+ console.log('Success ',res)
+}).catch((data)=>{
+ console.log(data)
 })
 
 console.log('Hello CallBack')
