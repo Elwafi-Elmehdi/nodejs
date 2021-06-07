@@ -10,6 +10,17 @@ MongoClient.connect(connectionURL,{useNewUrlParser:true},(error, client) => {
    return console.log('Unable to connect to db')
   const db = client.db(databaseName)
 
+db.collection('users').updateOne({
+    _id: new ObjectID('60b96d03d167f5b5717d116c')
+  },{
+    $set: {
+      name: "Aziz"
+    }
+  }).then((result) =>{
+    console.log(result)
+  }).catch((error)=>{
+    console.log(error)
+  })
   // db.collection('tasks').findOne({_id:new ObjectID("60bac99335ea59444deb24fb")},(error,result)=>{
   //   console.log(result)
   // })
