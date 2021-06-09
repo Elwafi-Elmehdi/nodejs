@@ -12,6 +12,17 @@ const User = mongoose.model('User',{
   required: true,
   trim: true
  },
+ password:{
+   type:String,
+   required:true,
+   trim: true,
+   minlength:6,
+   validate(value) {
+    if(value.toLowerCase().includes("password"))
+      throw new Error("password is invalid")
+   }
+   
+ },
  email:{
   type:String,
   required:true,
@@ -36,33 +47,37 @@ const User = mongoose.model('User',{
 
 const Task = mongoose.model('Task',{
  desc:{
+  trim:true,
+  required:true,
   type:String
  },
  completed:{
+  
+  default:false,
   type:Boolean
  }
 })
 
-// const day = new Task({
-//  desc:"Sbah lkhir",
-//  completed:true
+const day = new Task({
+ desc:"   foo",
+})
+
+day.save().then((result) => {
+ console.log(result);
+}).catch((err) => {
+ console.log(err);
+});
+
+
+
+// const me = new User({
+//  name:"  aziz   ",
+//  email:"  Hello@gmail.com  ",
+//  password: "     passw"
 // })
 
-// day.save().then((result) => {
-//  console.log(result);
-// }).catch((err) => {
-//  console.log(err);
-// });
-
-
-
-const me = new User({
- name:"  Said   ",
- email:"  Hello@gmail.com  ",
-})
-
-me.save().then(() => {
- console.log(me);
-}).catch((error)=>{
- console.log("Error ",error)
-})
+// me.save().then(() => {
+//  console.log(me);
+// }).catch((error)=>{
+//  console.log(error)
+// })
