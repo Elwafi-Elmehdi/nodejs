@@ -1,8 +1,11 @@
-const doWorkCallback = (callback) => {
- setTimeout(() => {
-  callback(undefined,[1,7,4])
- }, 2000);
+const add = (a,b) => {
+ return new Promise((resolve,reject) => {
+  setTimeout(() => {
+   resolve(a+b)
+  }, 2000);
+ })
 }
+
 
 doWorkCallback((err,res)=> {
  if(err)
