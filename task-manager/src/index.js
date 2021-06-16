@@ -4,7 +4,6 @@ const mongoose = require('./db/mongoose')
 // Models
 const User = require("./models/user")
 const Task  = require("./models/task")
-const e = require('express')
 
 const app = express()
 const port  = process.env.PORT || 3000
@@ -109,12 +108,54 @@ app.post('/tasks',async (req,res) => {
   }
 
 
+
 //  task.save().then(()=>{
 //   res.status(201).send(task)
 //  }).catch((err)=>[
 //   res.status(400).send(err)
 //  ])
 })
+
+// Update User EndPoint
+
+app.patch('/user/:id',async (req,res) => {
+  const updateInputs = Object.keys(req.body)
+  const validUpdates = ['email','name','age']
+  const isValid = updateInputs.every( att => validUpdates.includes(att))
+  if(!isValid){
+    return res.status(400).send({error : "Invalid Updates!"})
+  }
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true})
+    if(!user){
+      return res.status(404).send()
+    }
+    res.send(user)
+
+  } catch (error) {
+    res.status(500).send(error)
+  }
+})
+
+// Update Task EndPoint
+app.patch('/task/:id',async (req,res)=>{
+  const inputAttributes = Object.keys(req.body)
+  const validUpdates = ['desc','completed']
+  const isValid = inputAttributes.every(elem => validUpdates.includes(elem))
+  if(!isValid){
+    return res.status(400).send({error : "Invalid Updates!"})
+  }
+  try {
+    const task = await Task.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true})
+    if(!task){
+      return res.status(404).send()
+    }
+    res.send(task)
+  } catch (error) {
+    res.status(500).send(error)
+  }
+
+}) 
 
 app.listen(port,() =>{
  console.log("Lisening on ",port);
