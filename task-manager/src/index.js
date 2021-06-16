@@ -42,7 +42,7 @@ app.get('/users',async (req,res) =>{
 //  ])
 })
 
-app.get('/users/:id',async (req,res)=>{
+app.get('/user/:id',async (req,res)=>{
  const _id = req.params.id
  try {
    const user = await User.findById(_id)
@@ -79,7 +79,7 @@ app.get('/tasks',async (req,res) => {
 //  })
 })
 
-app.get('/tasks/:id',async (req,res) => {
+app.get('/task/:id',async (req,res) => {
  const _id = req.params.id
  try {
    const taska = await Task.findById(_id)
@@ -155,7 +155,37 @@ app.patch('/task/:id',async (req,res)=>{
     res.status(500).send(error)
   }
 
-}) 
+})
+
+// Delete User 
+
+app.delete('/user/:id', async (req,res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    if(!user){
+      return res.status(404).send({error:"User Notfound!"})
+    }
+    res.status(200).send(user)
+    
+  } catch (error) {
+    res.status(500).send(error)
+  }
+})
+
+// Delete Task
+
+app.delete('/task/:id',async (req,res) => {
+  try {
+    const task = await Task.findByIdAndDelete(req.params.id)
+    if(!task){
+      return res.status(404).send({error:"Task not found!"})
+    }
+    res.send(task)
+    
+  } catch (error) {
+    res.status(500).send(error)
+  }
+})
 
 app.listen(port,() =>{
  console.log("Lisening on ",port);
