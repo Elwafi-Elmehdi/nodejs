@@ -62,16 +62,20 @@ router.get('/user/:id',async (req,res)=>{
 
 router.patch('/user/:id',async (req,res) => {
  const updateInputs = Object.keys(req.body)
- const validUpdates = ['email','name','age']
+ const validUpdates = ['email','name','age','password']
  const isValid = updateInputs.every( att => validUpdates.includes(att))
  if(!isValid){
    return res.status(400).send({error : "Invalid Updates!"})
  }
  try {
-   const user = await User.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true})
+   const user = await User.findById(req.params.id)
+   updateInputs.forEach(element => user[element] = req.body[element])
+   await user.save()
+
+  //  Complete bug to be completed
    if(!user){
-     return res.status(404).send()
-   }
+    return res.status(404).send()
+  }
    res.send(user)
 
  } catch (error) {
