@@ -30,7 +30,6 @@ router.post('/users/login',async (req,res) => {
   } catch (error) {
     res.status(404).send()
   }
-
 })
 
 router.get('/users',async (req,res) =>{
