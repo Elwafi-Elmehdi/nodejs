@@ -40,21 +40,21 @@ router.get('/users/me',auth,async (req,res) => {
   res.send(req.user);
 })
 
-// router.get('/users',auth,async (req,res) =>{
+router.get('/users',auth,async (req,res) =>{
 
-//   try {
-//     const users = await User.find({})
-//     res.status(200).send(users)
-//   } catch (error) {
-//     res.status(500).send(error)
-//   }
+  try {
+    const users = await User.find({})
+    res.status(200).send(users)
+  } catch (error) {
+    res.status(500).send(error)
+  }
  
-// //  User.find({}).then((users)=>{
-// //   res.status(201).send(users)
-// //  }).catch((err)=>[
-// //   res.status(400).send(err)
-// //  ])
-// })
+//  User.find({}).then((users)=>{
+//   res.status(201).send(users)
+//  }).catch((err)=>[
+//   res.status(400).send(err)
+//  ])
+})
 
 router.get('/user/:id',async (req,res)=>{
  const _id = req.params.id

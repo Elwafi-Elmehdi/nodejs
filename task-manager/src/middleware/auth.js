@@ -5,11 +5,11 @@ const jwt = require('jsonwebtoken')
 const auth = async (req,res,next) => {
   try {
    const token = req.header('Authorization').replace('Bearer ','')
-   const decoded = jwt.decode(token,'thisIsTopSecret')
-   const user = User.findOne({_id:decoded._id,'tokens.token':token})
+   const decoded = jwt.verify(token,'thisIsTopSecret')
+   const user = await User.findOne({_id:decoded._id,'tokens.token':token})
 
-   if(!user){
-     throw new Error()
+   if(!user) {
+     throw new Error("User not found")
    }
    req.user = user
    next()
