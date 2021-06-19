@@ -6,9 +6,6 @@ const myFn = async () => {
  const isMatch = JWT.verify(token,"thisIsTopSecret")
  console.log(isMatch);
 
-
-
- // const hehe = JWT.
 }
 
 myFn()

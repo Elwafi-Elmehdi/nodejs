@@ -6,6 +6,12 @@ const port  = process.env.PORT || 3000
 const userRouter = require('./provided/userProvided')
 const taskRouter = require('./provided/taskProvided')
 
+
+//  // Desactivating Services 
+// app.use( (req,res,next) => {
+//   res.status(503).send('The Site is under Maintenance Please try another time')
+// })
+
 app.use(express.json())
 app.use(userRouter)
 app.use(taskRouter)
