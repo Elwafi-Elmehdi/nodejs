@@ -3,6 +3,7 @@ const { ObjectId } = require('mongodb');
 const User = require('../models/user')
 const router = new express.Router()
 const mongoose = require('../db/mongoose')
+const auth = require('../middleware/auth')
 // User Endpoints
 
 // Save User Endpoint
@@ -35,21 +36,25 @@ router.post('/users/login',async (req,res) => {
   }
 })
 
-router.get('/users',async (req,res) =>{
-
-  try {
-    const users = await User.find({})
-    res.status(200).send(users)
-  } catch (error) {
-    res.status(500).send(error)
-  }
- 
-//  User.find({}).then((users)=>{
-//   res.status(201).send(users)
-//  }).catch((err)=>[
-//   res.status(400).send(err)
-//  ])
+router.get('/users/me',auth,async (req,res) => {
+  res.send(req.user);
 })
+
+// router.get('/users',auth,async (req,res) =>{
+
+//   try {
+//     const users = await User.find({})
+//     res.status(200).send(users)
+//   } catch (error) {
+//     res.status(500).send(error)
+//   }
+ 
+// //  User.find({}).then((users)=>{
+// //   res.status(201).send(users)
+// //  }).catch((err)=>[
+// //   res.status(400).send(err)
+// //  ])
+// })
 
 router.get('/user/:id',async (req,res)=>{
  const _id = req.params.id
