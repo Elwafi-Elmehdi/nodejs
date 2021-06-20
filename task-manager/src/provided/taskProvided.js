@@ -9,11 +9,12 @@ const auth = require('../middleware/auth')
 
 // Get Tasks Endpoint
 
-router.get('/tasks',async (req,res) => {
+router.get('/tasks',auth,async (req,res) => {
 
  try {
-   const tasks = await Task.find({})
-   res.send(tasks)
+  //  const tasks = await Task.find({owner:req.user._id})
+  await req.user.tasks.populate('tasks').execPopulate()
+   res.send(req.user.tasks)
  } catch (error) {
    res.status(500).send()
  }
@@ -25,13 +26,13 @@ router.get('/tasks',async (req,res) => {
 //  })
 })
 
-router.get('/task/:id',async (req,res) => {
+router.get('/task/:id',auth,async (req,res) => {
 const _id = req.params.id
 try {
-  const taska = await Task.findById(_id)
-  if(!taska)
+  const task = await Task.findOne({_id:_id,owner:req.user._id})
+  if(!task)
    return res.status(404).send()
-   res.send(taska)
+  res.send(task)
 } catch (error) {
   res.status(500).send(error)
 }
@@ -92,7 +93,7 @@ router.patch('/task/:id',async (req,res)=>{
 
 // Delete Task EndPoint
 
-router.delete('/task/:id',async (req,res) => {
+router.delete('/task/:id',auth,async (req,res) => {
  try {
    const task = await Task.findByIdAndDelete(req.params.id)
    if(!task){
