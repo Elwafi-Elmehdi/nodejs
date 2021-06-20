@@ -105,9 +105,7 @@ router.get('/user/:id',async (req,res)=>{
 
 // Update User EndPoint
 
-router.patch('/user/:id',async (req,res) => {
-
-  console.log(ObjectId(req.params.id))
+router.patch('/user/:id',auth,async (req,res) => {
 
  const updateInputs = Object.keys(req.body)
  const validUpdates = ['email','name','age','password']
@@ -117,20 +115,15 @@ router.patch('/user/:id',async (req,res) => {
    return res.status(400).send({error : "Invalid Updates!"})
  }
  try {
-   const user = await User.findById(req.params.id)
-   console.log(user);
+   const user = req.user
+   if(!user){
+    return res.status(404).send()
+   }
    updateInputs.forEach(element => {
      user[element] = req.body[element]
    })
    await user.save()
-   if(!user){
-    return res.status(404).send()
-  }
-
-  //  Complete bug to be completed
-   
    res.send(user)
-
  } catch (error) {
    res.status(500).send(error)
  }
@@ -139,14 +132,12 @@ router.patch('/user/:id',async (req,res) => {
 
 // Delete User 
 
-router.delete('/user/:id', async (req,res) => {
+router.delete('/users/me',auth, async (req,res) => {
  try {
-   const user = await User.findByIdAndDelete(req.params.id);
-   if(!user){
-     return res.status(404).send({error:"User Not found!"})
-   }
-   res.status(200).send(user)
-   
+
+   await req.user.remove()
+   res.send(req.user)
+
  } catch (error) {
    res.status(500).send(error)
  }
