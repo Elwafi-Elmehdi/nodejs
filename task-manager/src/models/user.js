@@ -58,6 +58,12 @@ const userSchema = new mongoose.Schema({
    return userVO
  }
 
+ userSchema.virtual('tasks', {
+  ref: 'Task',
+  localField: '_id',
+  foreignField: 'owner',
+})
+
 userSchema.methods.generateJwtToken = async function(){
   const user = this
   const token = JWT.sign({_id: user._id.toString()},'thisIsTopSecret')
