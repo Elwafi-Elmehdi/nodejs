@@ -11,6 +11,10 @@ const Task = mongoose.model('Task',{
   
   default:false,
   type:Boolean
+ },
+ owner: {
+  type: mongoose.Schema.Types.ObjectId,
+  required: true,
  }
 })
 
