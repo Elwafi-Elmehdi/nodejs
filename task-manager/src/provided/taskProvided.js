@@ -11,14 +11,20 @@ const auth = require('../middleware/auth')
 
 router.get('/tasks',auth,async (req,res) => {
   const match = {}
+  const options = {}
   if(req.query.completed){
     match.completed = req.query.completed === 'true'
+  }
+  if(req.query.limit || req.query.skip) {
+    options.limit = parseInt(req.query.limit)
+    options.skip = parseInt(req.query.skip)
   }
  try {
   //  const tasks = await Task.find({owner:req.user._id})
   await req.user.populate({
     path:'tasks',
-    match
+    match,
+    options
   }).execPopulate()
   res.send(req.user.tasks)
  } catch (error) {
