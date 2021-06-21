@@ -29,7 +29,6 @@ router.post('/users/login',async (req,res) => {
   try {
     const user = await User.findByCredentials(req.body.email,req.body.password)
     const token =  await user.generateJwtToken()
-    console.log(token);
     res.send({user,token})
   } catch (error) {
     res.status(404).send()
@@ -63,6 +62,9 @@ router.post('/users/logoutAll',auth,async (req,res) => {
 
 })
 
+// GET tasks?completed=true
+// GET tasks?limit=10&skip=10
+// GET 
 router.get('/users/me',auth,async (req,res) => {
   res.send(req.user);
 })
