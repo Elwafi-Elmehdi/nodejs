@@ -13,8 +13,8 @@ router.get('/tasks',auth,async (req,res) => {
 
  try {
   //  const tasks = await Task.find({owner:req.user._id})
-  await req.user.tasks.populate('tasks').execPopulate()
-   res.send(req.user.tasks)
+  await req.user.populate('tasks').execPopulate()
+  res.send(req.user.tasks)
  } catch (error) {
    res.status(500).send()
  }
@@ -70,7 +70,7 @@ router.post('/tasks',auth,async (req,res) => {
 
 // Update Task EndPoint
 
-router.patch('/task/:id',async (req,res)=>{
+router.patch('/task/:id',auth,async (req,res)=>{
  const inputAttributes = Object.keys(req.body)
  const validUpdates = ['desc','completed']
  const isValid = inputAttributes.every(elem => validUpdates.includes(elem))
@@ -78,10 +78,15 @@ router.patch('/task/:id',async (req,res)=>{
    return res.status(400).send({error : "Invalid Updates!"})
  }
  try {
-   const task = await Task.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true})
+   const task = await Task.findOne({_id:req.params.id,owner:req.user._id})
+
    if(!task){
      return res.status(404).send()
    }
+   inputAttributes.forEach(elem => {
+     task[elem] = req.body[elem]
+   })
+   await task.save()
    res.send(task)
  } catch (error) {
    res.status(500).send(error)
@@ -95,10 +100,11 @@ router.patch('/task/:id',async (req,res)=>{
 
 router.delete('/task/:id',auth,async (req,res) => {
  try {
-   const task = await Task.findByIdAndDelete(req.params.id)
+   const task = await Task.findOneAndRemove({_id:req.params.id,owner:req.user._id})
    if(!task){
      return res.status(404).send({error:"Task not found!"})
    }
+   await task.remove()
    res.send(task)
    
  } catch (error) {
