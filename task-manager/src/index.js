@@ -5,15 +5,15 @@ const port  = process.env.PORT || 3000
 
 const userRouter = require('./provided/userProvided')
 const taskRouter = require('./provided/taskProvided')
-// const auth = require('./middleware/auth')
 
-// app.use(auth)
+const multer = require('multer')
+const uplaod = multer({
+ dest:'images'
+})
 
-
-//  // Desactivating Services 
-// app.use( (req,res,next) => {
-//   res.status(503).send('The Site is under Maintenance Please try another time')
-// })
+app.post('/upload',uplaod.single('upload'),(req,res) => {
+ res.send()
+})
 
 app.use(express.json())
 app.use(userRouter)
