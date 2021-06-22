@@ -5,7 +5,7 @@ const auth = require('../middleware/auth')
 
 // Multer Lib (File Uploads)
 const multer = require('multer')
-const uplaod = multer({dest:'avatars'})
+
 
 // Save User Endpoint
 
@@ -146,7 +146,13 @@ router.delete('/users/me',auth, async (req,res) => {
  }
 })
 
-
+// Profile Image Upload 
+const uplaod = multer({
+  dest:'avatars',
+  limits: {
+    fileSize: 1000000
+  }
+})
 router.post('/users/me/avatar',uplaod.single('avatar'),(req,res) => {
  res.send()
 })
