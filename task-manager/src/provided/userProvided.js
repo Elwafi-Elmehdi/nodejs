@@ -151,6 +151,12 @@ const uplaod = multer({
   dest:'avatars',
   limits: {
     fileSize: 1000000
+  },
+  fileFilter(req,file,cb){
+    if(!file.originalname.match(/\.(png|jpg|jpeg)$/)){
+      return cb(new Error('You can upload Images only (png/jpg/jpeg)'))
+    }
+    cb(undefined,true)
   }
 })
 router.post('/users/me/avatar',uplaod.single('avatar'),(req,res) => {
