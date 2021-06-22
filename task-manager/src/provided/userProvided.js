@@ -1,10 +1,11 @@
-const express = require('express');
-const { ObjectId } = require('mongodb');
+const express = require('express')
 const User = require('../models/user')
 const router = new express.Router()
-const mongoose = require('../db/mongoose')
 const auth = require('../middleware/auth')
-// User Endpoints
+
+// Multer Lib (File Uploads)
+const multer = require('multer')
+const uplaod = multer({dest:'avatars'})
 
 // Save User Endpoint
 
@@ -143,6 +144,11 @@ router.delete('/users/me',auth, async (req,res) => {
  } catch (error) {
    res.status(500).send(error)
  }
+})
+
+
+router.post('/users/me/avatar',uplaod.single('avatar'),(req,res) => {
+ res.send()
 })
 
 module.exports = router
