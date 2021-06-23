@@ -48,9 +48,10 @@ const userSchema = new mongoose.Schema({
      throw new Error('age is invalid')
    },
   },
- },{
-  timestamps:true
-})
+  avatar: {
+    type: Buffer,
+  },
+ },{timestamps:true})
 
  userSchema.methods.toJSON = function() {
    const user = this
