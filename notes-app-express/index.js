@@ -1,6 +1,14 @@
 const express = require('express')
 const app = express()
-const port =
+const port = 3000
+const resConsts = require('./src/consts/responce')
 
 app.use(express.json())
-app.listen()
+
+app.get('/',(req,res)=>{
+    res.send({message: resConsts.unauthorized })
+})
+
+app.listen(port,() => {
+    console.log("SERVER RUNING ON ",port)
+})
