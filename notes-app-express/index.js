@@ -1,12 +1,15 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
+const userRouter = require('./src/routes/User')
 const app = express()
-const port = 3000
-
-const resConsts = require('./src/consts/responce')
-const securityConsts = require('./src/consts/security')
+app.use(userRouter)
 
 app.use(express.json())
+const port = 3000
+
+
+
+
 
 app.get('/',async (req,res)=>{
     token = await jwt.sign({msg:'Hello World'},securityConsts.signature)
