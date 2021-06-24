@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+   rootURL : "localhost:3000"
 };
 
 /*
@@ -15,4 +16,3 @@ export const environment = {
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
 
-const port = 3000;

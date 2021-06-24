@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap');
+.landing-desc{
+
+  display: inline-block;
+  position: relative;
+  height: 565px;
+}
+.desc{
+  position: absolute;
+  left: 140px;
+  top: 60px;
+  word-break: break-word;
+}
+.Logo{
+  font-family: 'Kirang','Haerang';
+  font-size: 10rem;
+}
