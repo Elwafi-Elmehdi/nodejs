@@ -2,7 +2,7 @@ const express = require('express')
 require('./src/db/mongoose')
 const userRouter = require('./src/routes/User')
 const app = express()
-const port = 3000
+const port = 3001
 
 // Routes
 app.use(userRouter)
