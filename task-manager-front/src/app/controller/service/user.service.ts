@@ -7,41 +7,45 @@ import {environment} from "../../../environments/environment";
   providedIn: 'root',
 })
 export class UserService {
-
-  constructor(private http:HttpClient) { }
   private urlUser = environment.rootURL+"/users";
+  private _currentUser: User;
+  constructor(private http:HttpClient) { }
 
-  private _users: Array<User>;
-  private _loggedUser : User;
+  public readProfile(){
+    return this.http.get<User>(this.urlUser+'/me/')
+  }
+  public loginUser(user:User){
+    return this.http.post(this.urlUser+'/login',user);
+  }
+  public logoutUser(){
+    return this.http.post(this.urlUser+'/logout',{});
+  }
+  public logoutAllUser(){
+    return this.http.post(this.urlUser+'/logoutAll',{});
+  }
+  public register(user:User){
+    return this.http.post(this.urlUser,user);
+  }
 
-  public getAllUsers(){
-    return this.http.get(this.urlUser+'/')
-  }
-  public getProfileInfos() {
-    if(this._loggedUser ==! null){
-      return {...this._loggedUser};
-    }
-    return null;
-  }
+  // public sortTasks(condition:string){
+  //   const url= environment.rootURL;
+  //   switch (condition) {
+  //     case 'completed:desc':
+  //   }
+  //
+  // }
+
+
 
 
   get loggedUser(): User {
-    if(this._loggedUser === null)
+    if(this._currentUser === null)
       return new User();
-    return this._loggedUser;
+    return this._currentUser;
   }
 
   set loggedUser(value: User) {
-    this._loggedUser = value;
+    this._currentUser = value;
   }
 
-  get users(): Array<User> {
-    if(this._users === null)
-      return new Array<User>();
-    return this._users;
-  }
-
-  set users(value: Array<User>) {
-    this._users = value;
-  }
 }
