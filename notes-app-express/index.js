@@ -8,7 +8,6 @@ const port = 3000
 // Routes
 app.use(userRouter)
 
-
 app.listen(port,() => {
     console.log("SERVER RUNING ON",port)
 })
