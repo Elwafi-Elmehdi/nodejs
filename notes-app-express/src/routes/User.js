@@ -2,7 +2,6 @@ const express = require('express')
 const router = new express.Router()
 const User = require('../models/User')
 const resConsts = require('../consts/responce')
-const securityConsts = require('../consts/security')
 const url = '/users'
 
 router.get(url,async (req,res)=>{
