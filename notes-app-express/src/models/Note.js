@@ -14,7 +14,8 @@ const noteSchema = new mongoose.Schema({
         minlength:4,
     },
     owner: {
-        type: mongoose.Types.ObjectId
+        type: mongoose.Types.ObjectId,
+        required:true
     }
 },{
     timestamps:true
