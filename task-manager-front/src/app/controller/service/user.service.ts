@@ -35,9 +35,6 @@ export class UserService {
   //
   // }
 
-
-
-
   get loggedUser(): User {
     if(this._currentUser === null)
       return new User();

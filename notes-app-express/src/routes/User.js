@@ -14,10 +14,16 @@ router.get(url,async (req,res)=>{
     }
 })
 router.post(url,async (req,res)=>{
-    const user = new User(req.body)
-    if(!user)
-        return res.status(404).send({error:resConsts.internalServerError})
-    res.send(user)
+    try {
+        const user = new User(req.body)
+        if(!user)
+            return res.status(404).send({error:resConsts.internalServerError})
+        await user.save()
+        res.send(user)
+    }catch (e) {
+        res.status(500).send({error: resConsts.internalServerError})
+    }
+
 })
 
 module.exports = router
