@@ -28,6 +28,9 @@ const userSchema = new mongoose.Schema({
         trim:true,
         required:true
     },
+
+},{
+    timestamps: true,
 })
 
 userSchema.pre('save', async function (next){
