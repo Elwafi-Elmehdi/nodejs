@@ -26,10 +26,6 @@ router.post(url,async (req,res)=>{
         res.status(500).send({error: resConsts.internalServerError})
     }
 })
-// Upadte User
-// router.patch(url,async (req,res) => {
-//     const attrbs = req.body.keys()
-// })
 router.delete(url+'/:id',async (req,res)=>{
     const _id = req.params.id
     try{

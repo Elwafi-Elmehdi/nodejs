@@ -5,6 +5,15 @@ const url = '/notes'
 const consts = require('../consts/responce')
 
 
+router.get(url,async (req,res) => {
+    try {
+        const notes = await Note.find({})
+        res.send(notes)
+    }catch (e) {
+        res.status(500).send()
+    }
+})
+
 router.post(url,async (req,res) => {
 
     if(!req.body){
