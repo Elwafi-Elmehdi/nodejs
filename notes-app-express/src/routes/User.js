@@ -2,8 +2,10 @@ const express = require('express')
 const router = new express.Router()
 const User = require('../models/User')
 const resConsts = require('../consts/responce')
+const userConsts = require('../consts/user')
 const url = '/users'
 
+// Read All Users
 router.get(url,async (req,res)=>{
     try {
         const users = await User.find({})
@@ -12,6 +14,7 @@ router.get(url,async (req,res)=>{
         res.status(500).send({error: resConsts.internalServerError})
     }
 })
+// Register a user
 router.post(url,async (req,res)=>{
     try {
         const user = new User(req.body)
@@ -22,7 +25,22 @@ router.post(url,async (req,res)=>{
     }catch (e) {
         res.status(500).send({error: resConsts.internalServerError})
     }
-
+})
+// Upadte User
+// router.patch(url,async (req,res) => {
+//     const attrbs = req.body.keys()
+// })
+router.delete(url+'/:id',async (req,res)=>{
+    const _id = req.params.id
+    try{
+        const user = await User.findByIdAndDelete(_id)
+        if(!user){
+            return res.status(404).send({error:resConsts.pageNotFound})
+        }
+        res.send(user)
+    } catch (e) {
+        res.status(500).send({error: resConsts.internalServerError})
+    }
 })
 
 module.exports = router
