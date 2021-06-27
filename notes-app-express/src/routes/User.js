@@ -14,7 +14,7 @@ router.get(url,async (req,res)=>{
         res.status(500).send({error: resConsts.internalServerError})
     }
 })
-// Register a user
+// Register  User
 router.post(url,async (req,res)=>{
     try {
         const user = new User(req.body)
@@ -26,6 +26,8 @@ router.post(url,async (req,res)=>{
         res.status(500).send({error: resConsts.internalServerError})
     }
 })
+
+// Delete User
 router.delete(url+'/:id',async (req,res)=>{
     const _id = req.params.id
     try{
