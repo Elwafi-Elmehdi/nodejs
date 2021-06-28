@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.statics.findByCredentials = async (email,pwd) => {
-    const user  = await User.find({email:email})
+    const user  = await User.findOne({email:email})
     if(!user){
         throw new Error("Email not found")
     }

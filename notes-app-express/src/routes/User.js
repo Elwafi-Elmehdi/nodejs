@@ -46,7 +46,6 @@ router.delete(url+'/:id',async (req,res)=>{
 router.post(url+'/login',async (req,res) =>{
     try {
         const usercreds = {...req.body}
-        console.log(usercreds)
         const user = await User.findByCredentials(usercreds.email,usercreds.password)
         res.send(user)
     }catch (e) {
