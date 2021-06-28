@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Note = require('./Note')
+const conts = require('../consts/security')
 
 const userSchema = new mongoose.Schema({
     firstname:{
@@ -33,6 +34,18 @@ const userSchema = new mongoose.Schema({
 },{
     timestamps: true,
 })
+
+userSchema.statics.findByCredentials = async (email,pwd) => {
+    const user  = await User.find({email:email})
+    if(!user){
+        throw new Error("Email not found")
+    }
+    const isMatch = await bcrypt.compare(pwd,user.password)
+    if(!isMatch){
+        throw new Error('Password is incorrect')
+    }
+    return user
+}
 
 userSchema.pre('save', async function (next){
     const user = this
