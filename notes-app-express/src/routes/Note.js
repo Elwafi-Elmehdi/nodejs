@@ -59,12 +59,11 @@ router.patch(url+'/:id',async (req,res)=>{
         }
         note.label = changes.label
         note.body = changes.body
-        await Note.save(note)
+        await note.save(note)
         res.send(note)
     }catch (e) {
         res.status(500).send()
     }
-
 })
 
 
