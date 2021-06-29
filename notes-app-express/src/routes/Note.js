@@ -46,6 +46,27 @@ router.delete(url+'/:id',async (req,res) => {
     }
 })
 
+router.patch(url+'/:id',async (req,res)=>{
+    const _id = req.params.id
+    const changes = {...req.body}
+    if(!changes.label || !changes.body || !_id){
+        return res.status(400).send()
+    }
+    try{
+        const note = await Note.findById(_id)
+        if(!note){
+            return res.status(404).send()
+        }
+        note.label = changes.label
+        note.body = changes.body
+        await Note.save(note)
+        res.send(note)
+    }catch (e) {
+        res.status(500).send()
+    }
+
+})
+
 
 
 module.exports = router
