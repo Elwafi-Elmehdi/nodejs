@@ -30,14 +30,18 @@ const userSchema = new mongoose.Schema({
         trim:true,
         required:true
     },
-
+    tokens: [{
+        token:{
+            type:String
+        }
+    }],
 },{
     timestamps: true,
 })
 
 userSchema.methods.generateToken = async function(next) {
     const user = this
-    const token = await jwt.sign({_id:user._id.toString()},conts.signature,{expiredAt:conts.tokenExpiration})
+    const token = await jwt.sign({_id:user._id.toString()},conts.signature,{expiresIn: conts.tokenExpiration})
     return token
     next()
 }
