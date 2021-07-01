@@ -5,7 +5,8 @@ const User = require('../models/User')
 
 const auth = async (req,res, next) => {
     try {
-        const token = req.get(consts.tokenHeader).substr('Bearer '.length)
+        const token = req.header(consts.tokenHeader).substr('Bearer '.length)
+        console.log(req.header(consts.tokenHeader))
         if(!token){
             res.status(401).send({error:resConsts.unauthorized})
         }
@@ -17,5 +18,4 @@ const auth = async (req,res, next) => {
         res.status(500).send({error:e.message})
     }
 }
-
 module.exports = auth
