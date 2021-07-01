@@ -49,10 +49,22 @@ router.post(url+'/login',async (req,res) =>{
         const usercreds = {...req.body}
         const user = await User.findByCredentials(usercreds.email,usercreds.password)
         const token = await user.generateToken();
-        user.tokens.push({token})
         res.send({user,token})
     }catch (e) {
         res.status(401).send({error:e.message})
     }
 })
+
+// User Logout
+router.post(url+'/logout',auth,async (req,res) =>{
+    try {
+        console.log(req.token)
+        req.user.tokens.filter(elem => elem.token !== req.token)
+        await req.user.save()
+        res.send()
+    }catch (e) {
+        res.status(500).send(e.message)
+    }
+})
+
 module.exports = router
