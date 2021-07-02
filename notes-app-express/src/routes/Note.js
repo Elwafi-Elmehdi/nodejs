@@ -15,7 +15,7 @@ router.get(url,auth,async (req,res) => {
     }
 })
 
-router.post(url,async (req,res) => {
+router.post(url,auth,async (req,res) => {
 
     if(!req.body){
         return res.status(401).send({error:consts.badCredentials})
@@ -24,7 +24,7 @@ router.post(url,async (req,res) => {
     try {
         const note = new Note({
             ...req.body,
-            owner: req.body.owner
+            owner: req.user._id
         })
         await note.save()
         res.send(note)
