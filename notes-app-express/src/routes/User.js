@@ -29,12 +29,11 @@ router.post(url,async (req,res)=>{
 })
 
 // Delete User
-router.delete(url+'/:id',async (req,res)=>{
-    const _id = req.params.id
+router.delete(url+'/me',auth,async (req,res) => {
     try{
-        const user = await User.findByIdAndDelete(_id)
+        const user = await User.findByIdAndDelete(req.user._id)
         if(!user){
-            return res.status(404).send({error:resConsts.pageNotFound})
+            return res.status(404).send({error:resConsts.unauthorized})
         }
         res.send(user)
     } catch (e) {
