@@ -8,11 +8,14 @@ const auth = async (req,res, next) => {
         const token = req.header(consts.tokenHeader).replace('Bearer ','')
         const payload = await jwt.verify(token,consts.signature)
         const user = await User.findOne({_id:payload._id,'tokens.token':token})
+        if(!user){
+            return res.status(401).send({error:resConsts.unauthorized})
+        }
         req.token = token
         req.user = user
         next()
     }catch (e) {
-        res.status(401).send({error:resConsts.unauthorized})
+        res.status(500).send()
     }
 }
 module.exports = auth
