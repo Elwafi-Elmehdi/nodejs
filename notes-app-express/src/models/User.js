@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const validator = require('validator')
 const Note = require('./Note')
 const conts = require('../consts/security')
 
@@ -20,6 +21,11 @@ const userSchema = new mongoose.Schema({
         minlength:2
     },
     email:{
+        validate(value){
+            if(!validator.isEmail(value)){
+                throw new Error('Email is not valid')
+            }
+        },
         unique:true,
         required:true,
         trim:true,
