@@ -39,6 +39,15 @@ const userSchema = new mongoose.Schema({
     timestamps: true,
 })
 
+userSchema.methods.toJSON = function (next){
+    const user = this
+    const userVO = user.toObject()
+    delete userVO.tokens
+    delete userVO.password
+    return userVO
+    next()
+}
+
 userSchema.methods.generateToken = async function(next) {
     const user = this
     const token = await jwt.sign({_id:user._id.toString()},conts.signature,{expiresIn: conts.tokenExpiration})
