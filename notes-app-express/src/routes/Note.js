@@ -3,11 +3,12 @@ const router = new express.Router()
 const Note = require('../models/Note')
 const url = '/notes'
 const consts = require('../consts/responce')
+const auth = require('../middleware/auth')
 
 
-router.get(url,async (req,res) => {
+router.get(url,auth,async (req,res) => {
     try {
-        const notes = await Note.find({})
+        const notes = await Note.find({owner:req.user._id})
         res.send(notes)
     }catch (e) {
         res.status(500).send()

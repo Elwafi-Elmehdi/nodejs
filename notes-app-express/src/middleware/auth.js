@@ -6,16 +6,13 @@ const User = require('../models/User')
 const auth = async (req,res, next) => {
     try {
         const token = req.header(consts.tokenHeader).replace('Bearer ','')
-        if(!token){
-            res.status(401).send({error:resConsts.unauthorized})
-        }
         const payload = await jwt.verify(token,consts.signature)
         const user = await User.findOne({_id:payload._id,'tokens.token':token})
         req.token = token
         req.user = user
         next()
     }catch (e) {
-        res.status(500).send({error:resConsts.unauthorized})
+        res.status(401).send({error:resConsts.unauthorized})
     }
 }
 module.exports = auth

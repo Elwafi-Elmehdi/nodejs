@@ -59,7 +59,7 @@ router.post(url+'/login',async (req,res) =>{
 router.post(url+'/logout',auth,async (req,res) =>{
     try {
         console.log(req.token)
-        req.user.tokens.filter(elem => elem.token !== req.token)
+        req.user.tokens = req.user.tokens.filter(elem => elem.token !== req.token)
         await req.user.save()
         res.send()
     }catch (e) {
