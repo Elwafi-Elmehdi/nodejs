@@ -16,7 +16,12 @@ const noteSchema = new mongoose.Schema({
     owner: {
         type: mongoose.Types.ObjectId,
         required:true
-    }
+    },
+    images:[{
+        image:{
+            type:Buffer
+        }
+    }]
 },{
     timestamps:true
 })
