@@ -33,15 +33,14 @@ router.post(url,auth,async (req,res) => {
     }
 })
 
-router.delete(url+'/:id',async (req,res) => {
+router.delete(url+'/:id',auth,async (req,res) => {
     try {
         const _id = req.params.id
-        const note = await Note.findOneAndDelete(_id)
+        const note = await Note.findOneAndDelete({_id,owner:req.user._id})
         if(!note){
             return res.status(404).send({error:consts.pageNotFound})
         }
         res.send(note)
-
     }catch (e){
         res.status(500).send({error:consts.internalServerError})
     }
