@@ -26,5 +26,13 @@ const noteSchema = new mongoose.Schema({
     timestamps:true
 })
 
+noteSchema.methods.toJSON = function (next){
+    const note = this
+    const noteVO = note.toObject()
+    delete noteVO.images
+    return noteVO
+    next()
+}
+
 const Note = mongoose.model('Note',noteSchema);
 module.exports = Note
