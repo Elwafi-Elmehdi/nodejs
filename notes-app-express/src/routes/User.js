@@ -55,6 +55,7 @@ router.post(url+'/login',async (req,res) =>{
 })
 
 // User Logout
+
 router.post(url+'/logout',auth,async (req,res) =>{
     try {
         console.log(req.token)
@@ -65,6 +66,7 @@ router.post(url+'/logout',auth,async (req,res) =>{
         res.status(500).send(e.message)
     }
 })
+// User LogoutAll
 
 router.post(url+'/logoutAll',auth,async (req,res)=>{
     try {
@@ -77,4 +79,15 @@ router.post(url+'/logoutAll',auth,async (req,res)=>{
     }
 })
 
+// User Profile
+
+router.get(url+'/me',auth,async (req,res)=>{
+    try {
+        res.send(req.user)
+    }catch (e) {
+        res.status(500).send()
+    }
+})
+
+//
 module.exports = router
