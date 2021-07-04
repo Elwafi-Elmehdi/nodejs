@@ -111,11 +111,11 @@ router.post(url+'/me/avatar',auth,upload.single('avatar'),async (req,res)=>{
     }
 })
 
-router.get(url+'/me/avatar',auth,(req,res)=>{
+router.get(url+'/:id/avatar',async (req,res)=>{
     try {
-        img = req.user.avatar
+        const user = await User.findById(req.params.id)
         res.set('Content-Type','image/jpg')
-        res.send(img)
+        res.send(user.avatar)
     }catch (e) {
         res.status(500).send()
     }
