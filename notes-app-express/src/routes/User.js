@@ -93,22 +93,32 @@ router.get(url+'/me',auth,async (req,res)=>{
 // Upload Profil Img
 const upload = multer({
     limits :{
-        fileSize:1000000
+        fileSize: 1000000
     }
 })
 
 router.post(url+'/me/avatar',auth,upload.single('avatar'),async (req,res)=>{
-    const img = req.file.buffer
+    const img = req.file
     if(!img){
         return res.status(400).send()
     }
     try {
-        req.user.avatar = img
+        req.user.avatar = img.buffer
         await req.user.save()
+        res.send()
     }catch (e) {
         res.status(500).send()
     }
+})
 
+router.get(url+'/me/avatar',auth,(req,res)=>{
+    try {
+        img = req.user.avatar
+        res.set('Content-Type','image/jpg')
+        res.send(img)
+    }catch (e) {
+        res.status(500).send()
+    }
 })
 
 module.exports = router
