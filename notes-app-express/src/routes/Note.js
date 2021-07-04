@@ -89,7 +89,7 @@ router.post(url+'/:id/images',upload.array('images',8),async (req,res)=>{
 
 router.get(url+'/:id/images',async (req,res) => {
     const note = await Note.findById(req.params.id)
-    res.set('Content-Type',"images/jpg")
+    res.set('Content-Type','image/jpg')
     res.send(note.images)
 })
 
