@@ -5,7 +5,6 @@ const auth = require('../middleware/auth')
 const resConsts = require('../consts/responce')
 const userConsts = require('../consts/user')
 const multer = require('multer')
-const upload = multer()
 const url = '/users'
 
 // Read All Users
@@ -92,7 +91,23 @@ router.get(url+'/me',auth,async (req,res)=>{
 })
 
 // Upload Profil Img
+const upload = multer({
+    limits :{
+        fileSize:1000000
+    }
+})
+
 router.post(url+'/me/avatar',auth,upload.single('avatar'),async (req,res)=>{
+    const img = req.file.buffer
+    if(!img){
+        return res.status(400).send()
+    }
+    try {
+        req.user.avatar = img
+        await req.user.save()
+    }catch (e) {
+        res.status(500).send()
+    }
 
 })
 

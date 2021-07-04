@@ -6,6 +6,9 @@ const Note = require('./Note')
 const conts = require('../consts/security')
 
 const userSchema = new mongoose.Schema({
+    avatar:{
+      type:Buffer
+    },
     firstname:{
         type:String,
         required:true,
