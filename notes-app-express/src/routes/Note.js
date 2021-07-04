@@ -4,6 +4,8 @@ const Note = require('../models/Note')
 const url = '/notes'
 const consts = require('../consts/responce')
 const auth = require('../middleware/auth')
+const multer = require('multer')
+const upload = multer()
 
 
 router.get(url,auth,async (req,res) => {

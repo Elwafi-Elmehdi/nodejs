@@ -4,6 +4,8 @@ const User = require('../models/User')
 const auth = require('../middleware/auth')
 const resConsts = require('../consts/responce')
 const userConsts = require('../consts/user')
+const multer = require('multer')
+const upload = multer()
 const url = '/users'
 
 // Read All Users
@@ -89,5 +91,9 @@ router.get(url+'/me',auth,async (req,res)=>{
     }
 })
 
-//
+// Upload Profil Img
+router.post(url+'/me/avatar',auth,upload.single('avatar'),async (req,res)=>{
+
+})
+
 module.exports = router
