@@ -68,6 +68,23 @@ router.patch(url+'/:id',async (req,res)=>{
     }
 })
 
-
+router.post(url+'/:id/images',upload.array('images',8),async (req,res)=>{
+    const images = req.files;
+    if(images){
+        return res.status(400).send()
+    }
+    try {
+        const imagesVO = []
+        images.forEach(elem => {
+            imagesVO.push({image:elem.buffer})
+        })
+        const note = await Note.findById(req.params.id)
+        note.images = imagesVO
+        await note.save()
+        res.send(note)
+    }catch (e) {
+        res.status(500).send()
+    }
+})
 
 module.exports = router
