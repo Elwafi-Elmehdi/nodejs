@@ -8,7 +8,14 @@ const auth = require('../middleware/auth')
 
 
 // Get Tasks Endpoint
-
+router.get('/tasks/all',async (req,res) => {
+    try {
+        const tasks = await Task.find({})
+        res.send(tasks)
+    }catch (e) {
+        res.status(500).send()
+    }
+})
 router.get('/tasks',auth,async (req,res) => {
   const match = {}
   const options = {}
