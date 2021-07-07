@@ -10,7 +10,7 @@ const multer = require('multer')
 
 // Save User Endpoint
 
-router.post('/users',async (req,res) =>{
+router.post('/users/register',async (req,res) =>{
  const user = new User(req.body); 
 
   try{

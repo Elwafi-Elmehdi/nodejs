@@ -5,11 +5,16 @@ const JWT = require('jsonwebtoken')
 const Task = require('../models/task')
 
 const userSchema = new mongoose.Schema({
-  name:{
+  firstname:{
    type: String,
    required: true,
    trim: true
   },
+    lastname:{
+        type: String,
+        required: true,
+        trim: true
+    },
   tokens:[{
     token: {
       type:String,
@@ -48,6 +53,10 @@ const userSchema = new mongoose.Schema({
      throw new Error('age is invalid')
    },
   },
+    bio : {
+      type:String,
+        maxlength:200
+    },
   avatar: {
     type: Buffer,
   },
