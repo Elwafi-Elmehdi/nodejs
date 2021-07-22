@@ -67,7 +67,7 @@ const userSchema = new mongoose.Schema({
    const userVO = user.toObject()
    delete userVO.password
    delete userVO.tokens
-   delete userVO.avatar   
+   delete userVO.avatar
    return userVO
  }
 
