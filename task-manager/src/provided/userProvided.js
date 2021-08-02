@@ -181,8 +181,11 @@ router.delete('/users/me/avatar',auth,async (req,res)=>{
 router.get('/users/:id/avatar',async (req,res)=>{
   try {
     const user = await User.findById(req.params.id)
-    if(!user || !user.avatar){
+    if(!user){
       throw new Error("User or Avatar not found")
+    }
+    if(!user.avatar){
+        return res.redirect('http://localhost:3000/default/default-avatar.png')
     }
     res.set('Content-Type','image/png')
     res.send(user.avatar)
