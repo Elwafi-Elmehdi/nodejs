@@ -1,13 +1,19 @@
 # App-01 : Notes App
 
-This is my first app in nodejs runtime, it can add , read , remove and list notes using the commend agruments
+CONTACT : elwafi.courrier99@gmail.com  
+DATE : 28/08/2021  
+**NOTE** : This is my first app in nodejs runtime, it can add , read , remove and list notes using the commend agruments
 
-## Arguments
+## How To
 
-- read [**title**]
-- remove [**title**]
-- add [**title**] [**body**]
-- list
+First you need to run `npm install`
+
+**Arguments**
+
+-   read [**title**]
+-   remove [**title**]
+-   add [**title**] [**body**]
+-   list
 
 ## Images
 
@@ -21,4 +27,13 @@ This is my first app in nodejs runtime, it can add , read , remove and list note
 
 ![01](./imgs/04.png)
 
-### made with **<3** in Morocco
+## Project File Structure
+
+**note-taking-app**  
+├── app.js  
+├── node_modules  
+├── notes.js  
+├── notes.json  
+├── package.json  
+├── package-lock.json  
+└── README.md
