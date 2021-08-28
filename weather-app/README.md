@@ -16,14 +16,10 @@ and then you can run `node app.js <location>`
 
 ## API
 
----
-
 -   Weatherstack
 -   Mapbox
 
 ## Project File Structure
-
----
 
 **weather-app**  
 ├── app.js  
