@@ -112,7 +112,7 @@ router.get('/user/:id',async (req,res)=>{
 router.patch('/user/:id',auth,async (req,res) => {
 
  const updateInputs = Object.keys(req.body)
- const validUpdates = ['email','name','age','password']
+ const validUpdates = ['email','name','age','password','bio']
  const isValid = updateInputs.every( att => validUpdates.includes(att))
 
  if(!isValid){
