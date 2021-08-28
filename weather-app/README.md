@@ -5,8 +5,6 @@ DATE : 28/08/2021
 
 ## How To
 
----
-
 First you need to run `npm install`  
 and then you can run `node app.js <location>`
 
