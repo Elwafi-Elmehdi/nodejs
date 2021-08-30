@@ -2,7 +2,7 @@
 
 CONTACT : elwafi.courrier99@gmail.com  
 DATE : 28/08/2021  
-**NOTE** : My `NodeJS` Learning Patth
+**NOTE** : My `NodeJS` Learning Path
 
 ### Apps description
 
