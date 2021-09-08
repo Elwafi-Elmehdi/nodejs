@@ -6,4 +6,4 @@ db.connect(dbName,{
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
-})
+},()=>{})
