@@ -26,5 +26,12 @@ test('Should login a user',async () => {
     await request(app).post('/users/login').send({
         email: user1.email,
         password: user1.password
-    })
+    }).expect(200)
+})
+
+test('Should not login unkown user',async () => {
+    await request(app).post('/users/login').send({
+        email: "blabla@foo.bar",
+        password: "passsqw7784@"
+    }).expect(404)
 })
