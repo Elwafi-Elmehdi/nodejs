@@ -5,10 +5,10 @@ test("Testing add function",()=>{
 })
 
 
-test("should throw error async ",(done)=>{
-    setTimeout(()=>{
-        expect(1).toBe(2);
-        done()
-    },2000)
-})
+// test("should throw error async ",(done)=>{
+//     setTimeout(()=>{
+//         expect(1).toBe(2);
+//         done()
+//     },2000)
+// })
 
