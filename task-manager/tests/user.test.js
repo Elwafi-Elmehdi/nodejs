@@ -21,3 +21,10 @@ test('Should register a new user',async () => {
         password:"hehehe1777!",
     }).expect(201)
 })
+
+test('Should login a user',async () => {
+    await request(app).post('/users/login').send({
+        email: user1.email,
+        password: user1.password
+    })
+})
