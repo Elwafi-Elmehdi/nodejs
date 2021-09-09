@@ -1,17 +1,16 @@
 const express = require('express');
-const Category = require('../models/Category')
+const Tag = require('../models/Tag')
 const router = new express.Router();
 
-router.post('/categories/',async (req,res)=>{
+router.post('/tags/',async (req,res)=>{
     try {
-        const category = new Category({...req.body});
-        await category.save();
-        res.send(category)
+        const tag = new Tag({...req.body});
+        await tag.save();
+        res.send(tag)
     }
     catch (e) {
         res.status(400).send({error:"User Error"})
     }
-
 })
 
 module.exports = router
