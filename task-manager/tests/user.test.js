@@ -1,6 +1,9 @@
 const request = require('supertest')
 const app = require('../src/app')
 const User = require('../src/models/user')
+const jwt = require('jsonwebtoken')
+const mongoose = require('mongoose')
+
 const user1 = {
     firstname:"Reda",
     lastname:"hihi",
@@ -31,7 +34,7 @@ test('Should login a user',async () => {
 
 test('Should not login unkown user',async () => {
     await request(app).post('/users/login').send({
-        email: "blabla@foo.bar",
+        email: user1.email,
         password: "passsqw7784@"
     }).expect(404)
 })
