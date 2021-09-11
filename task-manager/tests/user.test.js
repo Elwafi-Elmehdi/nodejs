@@ -42,7 +42,8 @@ test('Should register a new user',async () => {
         },
         token: user.tokens[0].token
     })
-
+    //Assert user password is encrypted
+    expect(user.password).not.toBe('hehehe1777!')
 })
 
 test('Should login a user',async () => {
