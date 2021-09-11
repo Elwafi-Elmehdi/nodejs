@@ -51,7 +51,7 @@ test('Should login a user',async () => {
         email: user1.email,
         password: user1.password
     }).expect(200)
-    const user = await User.findById(response.body.user._id);
+    const user = await User.findById(user1Id);
     expect(user.tokens[1].token).toBe(response.body.token)
 })
 
@@ -78,10 +78,12 @@ test("Should not get profile",async () => {
 })
 
 test("Should delete user acount",async () => {
-    await request(app)
+    const response = await request(app)
         .delete('/users/me')
         .set('Authorization',`Bearer ${user1.tokens[0].token}`)
         .expect(200)
+    const user = await User.findById(response.body._id);
+    expect(user).toBeNull()
 })
 
 test('Should not delete any user no auth',async () => {
