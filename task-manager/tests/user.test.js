@@ -51,3 +51,10 @@ test("Should get user profile",async () =>{
         .send()
         .expect(200)
 })
+
+test("Should not get profile",async () => {
+    await request(app)
+        .get('/users/me')
+        .send()
+        .expect(401)
+})
