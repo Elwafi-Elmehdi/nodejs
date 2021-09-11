@@ -47,10 +47,12 @@ test('Should register a new user',async () => {
 })
 
 test('Should login a user',async () => {
-    await request(app).post('/users/login').send({
+    const response = await request(app).post('/users/login').send({
         email: user1.email,
         password: user1.password
     }).expect(200)
+    const user = await User.findById(response.body.user._id);
+    expect(user.tokens[1].token).toBe(response.body.token)
 })
 
 test('Should not login unkown user',async () => {
