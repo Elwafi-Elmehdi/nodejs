@@ -29,8 +29,20 @@ test('Should register a new user',async () => {
         password:"hehehe1777!",
     }).expect(201)
 
-    const user = User.findById(response._id)
+    // Assert user is correctly registered
+    const user = await User.findById(response.body.user._id)
     expect(user).not.toBeNull();
+
+    // Assert response body is correct
+    expect(response.body).toMatchObject({
+        user :{
+            firstname:"Mehdi",
+            lastname:"hihi",
+            email:"hehe@hehe.hehe",
+        },
+        token: user.tokens[0].token
+    })
+
 })
 
 test('Should login a user',async () => {
