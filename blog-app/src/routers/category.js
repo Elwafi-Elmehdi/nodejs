@@ -22,4 +22,24 @@ router.get('/categories/all',async (req,res)=>{
     }
 })
 
+router.get('/categories/:title',async (req,res)=>{
+    try {
+        const title = req.params.title
+        const category = await Category.findOne({title:title})
+        res.send(category)
+    }catch (e) {
+        res.status(500).send()
+    }
+})
+
+router.delete('/categories/:title',async (req,res)=>{
+    try {
+        const title = req.params.title
+        const category = await Category.findOneAndDelete({title:title})
+        res.send(category)
+    }catch (e) {
+        res.status(500).send()
+    }
+})
+
 module.exports = router
