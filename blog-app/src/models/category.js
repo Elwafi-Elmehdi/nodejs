@@ -5,6 +5,7 @@ const {Schema} = mongoose;
 const categorySchema = new Schema({
     title : {
         type:String,
+        unique:true,
         required:true
     },
     body:{
