@@ -1,5 +1,5 @@
 const express = require('express');
-const Tag = require('../models/Tag')
+const Tag = require('../models/tag')
 const router = new express.Router();
 
 router.post('/tags/',async (req,res)=>{
