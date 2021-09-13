@@ -11,7 +11,15 @@ router.post('/categories',async (req,res)=>{
     catch (e) {
         res.status(400).send({error:"User Error"})
     }
+})
 
+router.get('/categories/all',async (req,res)=>{
+    try {
+        const categories = await Category.find({})
+        res.send(categories)
+    }catch (e) {
+        res.status(500).send()
+    }
 })
 
 module.exports = router
