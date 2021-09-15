@@ -12,7 +12,7 @@ const categorySchema = new Schema({
       type:String,
       maxlength:250
     }
-})
+},{timestamps:true})
 
 const Category = new mongoose.model('Category',categorySchema)
 module.exports = Category
