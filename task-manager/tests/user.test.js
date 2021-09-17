@@ -125,15 +125,13 @@ test("Should set updates for user model", async () => {
 		.patch(`/user/${user1Id}`)
 		.set("Authorization", `Bearer ${user1.tokens[0].token}`)
 		.send({
-			firstname: "Mehdi",
-			lastname: "Reda",
+			age: 78,
 			email: "mehdi@ewhhew.hehe",
 		})
 		.expect(200);
 	const user = await User.findById(user1Id);
 	expect(user).toMatchObject({
-		firstname: "Mehdi",
-		lastname: "Reda",
+		age: 78,
 		email: "mehdi@ewhhew.hehe",
 	});
 });
