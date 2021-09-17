@@ -119,3 +119,21 @@ test("Should not update invalid fields", async () => {
 		})
 		.expect(400);
 });
+
+test("Should set updates for user model", async () => {
+	await request(app)
+		.patch(`/user/${user1Id}`)
+		.set("Authorization", `Bearer ${user1.tokens[0].token}`)
+		.send({
+			firstname: "Mehdi",
+			lastname: "Reda",
+			email: "mehdi@ewhhew.hehe",
+		})
+		.expect(200);
+	const user = await User.findById(user1Id);
+	expect(user).toMatchObject({
+		firstname: "Mehdi",
+		lastname: "Reda",
+		email: "mehdi@ewhhew.hehe",
+	});
+});
