@@ -13,5 +13,5 @@ test("Should create a new task", async () => {
 		})
 		.expect(200);
 	const task = await Task.findById(response.body._id);
-	expect(task).toEqual(task);
+	expect(task.owner).toEqual(user1Id);
 });
