@@ -8,7 +8,7 @@ beforeEach(setUpDB);
 // beforeAll(setUpDB);
 
 test("Should create a new task", async () => {
-	await request(app)
+	const response = await request(app)
 		.post("/tasks")
 		.set("Authorization", `Bearer ${user1.tokens[0].token}`)
 		.send({
@@ -16,6 +16,8 @@ test("Should create a new task", async () => {
 			desc: "Learn Testing Software",
 		})
 		.expect(201);
-	// const task = await Task.findById(response.body._id);
-	// expect(task.owner).toEqual(user1Id);
+	const task = await Task.findById(response.body._id);
+	expect(task).not.toBeNull();
+	expect(task.owner).toEqual(user1Id);
+	expect(task.completed).toBeFalsy();
 });
