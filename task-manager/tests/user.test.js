@@ -2,13 +2,9 @@ const request = require("supertest");
 const app = require("../src/app");
 const User = require("../src/models/user");
 
-const user1Id = require("./fixtures/db");
-const user1 = require("./fixtures/db");
-const setUpDB = require("./fixtures/db");
+const { user1Id, user1, setUpDB } = require("./fixtures/db");
 
-beforeEach(async () => {
-	setUpDB();
-});
+beforeEach(setUpDB);
 
 test("Should register a new user", async () => {
 	const response = await request(app)
