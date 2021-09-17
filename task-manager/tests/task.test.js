@@ -5,11 +5,14 @@ const { user1Id, user1, setUpDB } = require("./fixtures/db");
 
 beforeEach(setUpDB);
 
+// beforeAll(setUpDB);
+
 test("Should create a new task", async () => {
 	await request(app)
 		.post("/tasks")
 		.set("Authorization", `Bearer ${user1.tokens[0].token}`)
 		.send({
+			label: "Task-01",
 			desc: "Learn Testing Software",
 		})
 		.expect(201);
