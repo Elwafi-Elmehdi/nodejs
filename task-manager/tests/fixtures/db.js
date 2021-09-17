@@ -20,3 +20,9 @@ const setUpDB = async () => {
 	await User.deleteMany();
 	await new User(user1).save();
 };
+
+module.exports = {
+	user1Id,
+	user1,
+	setUpDB,
+};
