@@ -77,7 +77,7 @@ router.post("/tasks", auth, async (req, res) => {
 	});
 	try {
 		const taska = await task.save();
-		res.send(taska);
+		res.status(201).send(taska);
 	} catch (error) {
 		res.status(500).send();
 	}
