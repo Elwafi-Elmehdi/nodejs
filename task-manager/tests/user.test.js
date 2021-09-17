@@ -110,12 +110,12 @@ test("Should set avatar", async () => {
 });
 
 test("Should not update invalid fields", async () => {
-    await request(app)
-		.post(`/user/${user1Id}`)
+	await request(app)
+		.patch(`/user/${user1Id}`)
+		.set("Authorization", `Bearer ${user1.tokens[0].token}`)
 		.send({
 			localation: "Marrakech, 758 Gueliz",
 			cin: "JSAJQ175",
 		})
-		.expect(500);
-        
+		.expect(400);
 });
