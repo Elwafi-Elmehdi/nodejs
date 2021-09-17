@@ -104,4 +104,7 @@ test("Should set avatar", async () => {
 		.set("Authorization", `Bearer ${user1.tokens[0].token}`)
 		.attach("avatar", "avatars/default-avatar.png")
 		.expect(200);
+
+	const user = await User.findById(user1Id);
+	expect(user.avatar).toEqual(expect.any(Buffer));
 });
