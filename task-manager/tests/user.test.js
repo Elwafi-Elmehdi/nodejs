@@ -108,3 +108,14 @@ test("Should set avatar", async () => {
 	const user = await User.findById(user1Id);
 	expect(user.avatar).toEqual(expect.any(Buffer));
 });
+
+test("Should not update invalid fields", async () => {
+    await request(app)
+		.post(`/user/${user1Id}`)
+		.send({
+			localation: "Marrakech, 758 Gueliz",
+			cin: "JSAJQ175",
+		})
+		.expect(500);
+        
+});
