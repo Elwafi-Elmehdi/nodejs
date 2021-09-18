@@ -1,7 +1,7 @@
 const app = require("../src/app");
 const Task = require("../src/models/task");
 const request = require("supertest");
-const { user1Id, user1, user2, setUpDB } = require("./fixtures/db");
+const { user1Id, user1, user2, setUpDB, taskTwo } = require("./fixtures/db");
 
 beforeEach(setUpDB);
 
@@ -30,4 +30,10 @@ test("Should get all user one tasks", async () => {
 	expect(response.body.length).toBe(2);
 });
 
-test("")
+test("Should test delete task security", async () => {
+	await request(app)
+		.delete(`/task/${taskTwo._id}`)
+		.set("Authorization", `Bearer ${user2.tokens[0].token}`)
+		.send()
+		.expect(404);
+});
