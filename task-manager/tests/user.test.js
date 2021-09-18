@@ -118,3 +118,7 @@ test("Should set updates for user model", async () => {
 		email: "mehdi-elwafi@ewhhew.hehe",
 	});
 });
+
+test("Should not delete unauthenticated user", async () => {
+	await request(app).delete("/users/me").send().expect(401);
+});
