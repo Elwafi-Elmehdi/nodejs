@@ -5,8 +5,6 @@ const { user1Id, user1, setUpDB } = require("./fixtures/db");
 
 beforeEach(setUpDB);
 
-// beforeAll(setUpDB);
-
 test("Should create a new task", async () => {
 	const response = await request(app)
 		.post("/tasks")
