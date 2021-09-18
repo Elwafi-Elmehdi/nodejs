@@ -36,4 +36,6 @@ test("Should test delete task security", async () => {
 		.set("Authorization", `Bearer ${user2.tokens[0].token}`)
 		.send()
 		.expect(404);
+	const task = await Task.findById(taskTwo._id);
+	expect(task).not.toBeNull();
 });
