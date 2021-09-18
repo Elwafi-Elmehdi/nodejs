@@ -31,13 +31,40 @@ const user2 = {
 	],
 };
 
+const taskOne = {
+	_id: new mongoose.Types.ObjectId(),
+	label: "First Task",
+	desc: "1",
+	completed: false,
+	owner: user1Id,
+};
 
+const taskTwo = {
+	_id: new mongoose.Types.ObjectId(),
+	label: "Second Task",
+	desc: "2",
+	completed: true,
+	owner: user1Id,
+};
+
+const taskThree = {
+	_id: new mongoose.Types.ObjectId(),
+	label: "Thierd Task",
+	desc: "2",
+	completed: false,
+	owner: user2Id,
+};
 
 const setUpDB = async () => {
 	await User.deleteMany();
 	await Task.deleteMany();
+
 	await new User(user1).save();
 	await new User(user2).save();
+
+	await new Task(taskOne).save();
+	await new Task(taskTwo).save();
+	await new Task(taskThree).save();
 };
 
 module.exports = {
