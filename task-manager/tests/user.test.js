@@ -109,12 +109,12 @@ test("Should set updates for user model", async () => {
 		.set("Authorization", `Bearer ${user1.tokens[0].token}`)
 		.send({
 			age: 78,
-			email: "mehdi@ewhhew.hehe",
+			email: "mehdi-elwafi@ewhhew.hehe",
 		})
 		.expect(200);
 	const user = await User.findById(user1Id);
 	expect(user).toMatchObject({
 		age: 78,
-		email: "mehdi@ewhhew.hehe",
+		email: "mehdi-elwafi@ewhhew.hehe",
 	});
 });

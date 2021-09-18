@@ -19,7 +19,7 @@ const user1 = {
 
 const user2Id = new mongoose.Types.ObjectId();
 const user2 = {
-	_id: user1Id,
+	_id: user2Id,
 	firstname: "Mehdi",
 	lastname: "hihi",
 	email: "mehdi@ewhhew.hehe",
