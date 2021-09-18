@@ -50,5 +50,6 @@ test("Should filter tasks by completed=true", async () => {
 		.set("Authorization", `Bearer ${user1.tokens[0].token}`)
 		.send()
 		.expect(200);
-	
+	const task = await Task.find({ owner: user1Id, completed: true });
+	expect(response.body).toHaveLength(1);
 });
