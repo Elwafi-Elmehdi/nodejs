@@ -39,3 +39,7 @@ test("Should test delete task security", async () => {
 	const task = await Task.findById(taskTwo._id);
 	expect(task).not.toBeNull();
 });
+
+test("Should not delete task ", async () => {
+	await request(app).delete(`/task/${taskTwo._id}`).send().expect(401);
+});
