@@ -43,3 +43,12 @@ test("Should test delete task security", async () => {
 test("Should not delete task ", async () => {
 	await request(app).delete(`/task/${taskTwo._id}`).send().expect(401);
 });
+
+test("Should filter tasks by completed=true", async () => {
+	const response = await request(app)
+		.get("/tasks?completed=true")
+		.set("Authorization", `Bearer ${user1.tokens[0].token}`)
+		.send()
+		.expect(200);
+	
+});
