@@ -6,5 +6,5 @@ beforeEach(initDB)
 
 test("Should setup userOne in db",async () => {
     const user = await User.findById(userOneId)
-    expect(user).not.toBeNull()
+    expect(user._id).toMatchObject(userOneId)
 });
