@@ -49,6 +49,7 @@ router.delete(url + "/me", auth, async (req, res) => {
 router.post(url + "/login", async (req, res) => {
 	try {
 		const usercreds = { ...req.body };
+		console.log(req.body);
 		const user = await User.findByCredentials(
 			usercreds.email,
 			usercreds.password
@@ -56,6 +57,7 @@ router.post(url + "/login", async (req, res) => {
 		const token = await user.generateToken();
 		res.send({ user, token });
 	} catch (e) {
+		console.log(e.message);
 		res.status(401).send({ error: e.message });
 	}
 });
