@@ -12,12 +12,13 @@ test("Should setup userOne in db", async () => {
 
 test("Should not login to the count", async () => {
 	const response = await request(app)
-		.post("/login")
+		.post("/users/login")
 		.send({
 			email: userOne.email,
 			passowd: userOne.password,
 		})
 		.expect(200);
+
 	expect(response.body).toMatchObject({
 		...userOne,
 	});
