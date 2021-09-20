@@ -12,6 +12,7 @@ router.post("/users", async (req, res) => {
 		await user.save();
 		res.send(user);
 	} catch (error) {
+		console.log(error);
 		res.status(400).send();
 	}
 });
