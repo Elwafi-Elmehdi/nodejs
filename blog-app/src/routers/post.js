@@ -13,4 +13,12 @@ router.post("/posts", auth, async (req, res) => {
 	}
 });
 
+router.get("/posts/all",auth,async (req,res) => {
+	try {
+		const 
+	} catch (error) {
+		
+	}
+})
+
 module.exports = router;
