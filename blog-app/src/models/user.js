@@ -28,6 +28,7 @@ const userSchema = new mongoose.Schema(
 		},
 		password: {
 			type: String,
+			required: true,
 		},
 	},
 	{ timestamps: true }
@@ -44,10 +45,10 @@ userSchema.pre("save", async (next) => {
 	next();
 });
 
-userSchema.methods.toJSON = function () {
-	const user = this;
-	return user;
-};
+// userSchema.methods.toJSON = function () {
+// 	const user = this;
+// 	return user;
+// };
 
 const User = new mongoose.model("User", userSchema);
 
