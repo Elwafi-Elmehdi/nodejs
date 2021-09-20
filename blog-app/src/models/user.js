@@ -45,10 +45,12 @@ userSchema.pre("save", async function (next) {
 	next();
 });
 
-// userSchema.methods.toJSON = function () {
-// 	const user = this;
-// 	return user;
-// };
+userSchema.methods.toJSON = function () {
+	const user = this;
+	const vo = user.toObject();
+	delete vo.password;
+	return vo;
+};
 
 const User = new mongoose.model("User", userSchema);
 
