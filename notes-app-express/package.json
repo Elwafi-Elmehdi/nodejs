@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "env-cmd -f ./config/dev.env nodemon index.js",
-    "test": "env-cmd -f ./config/test.env jest --detectOpenHandles"
+    "test": "env-cmd -f ./config/test.env jest --forceExit"
   },
   "jest": {
     "testEnvironment": "node"
@@ -23,7 +23,7 @@
     "express": "^4.17.1",
     "jest": "^27.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.14",
+    "mongoose": "^5.3.16",
     "multer": "^1.4.2",
     "validator": "^13.6.0"
   }

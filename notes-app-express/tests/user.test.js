@@ -5,6 +5,10 @@ const { userOne, userOneId, initDB } = require("./fixtures/db");
 
 beforeEach(initDB);
 
+afterAll(async () => {
+	await new Promise((resolve) => setTimeout(() => resolve(), 500)); // avoid jest open handle error
+});
+
 const userTwo = {
 	firstname: "Reda",
 	lastname: "ELwafi",

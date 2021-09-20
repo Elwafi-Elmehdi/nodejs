@@ -5,7 +5,6 @@ mongoose.connect(
 	{
 		useNewUrlParser: true,
 		useCreateIndex: true,
-		useUnifiedTopology: true,
 	},
 	(err) => {
 		console.log(err);
