@@ -1,7 +1,12 @@
 const express = require("express");
 const User = require("../models/user");
+const auth = require("../middleware/auth");
 const router = new express.Router();
 
+router.get("/", auth, (req, res) => {
+	console.log(req.ip);
+	res.send("Hello, World!");
+});
 
 router.post("/users", async (req, res) => {
 	try {
