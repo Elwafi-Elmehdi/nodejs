@@ -12,6 +12,10 @@ const postSchema = new mongoose.Schema(
 		content: {
 			type: String,
 		},
+		owner: {
+			required: true,
+			type: mongoose.Types.ObjectId,
+		},
 	},
 	{ timestamps: true }
 );
