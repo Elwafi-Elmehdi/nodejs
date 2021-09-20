@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema(
 			unique: true,
 			required: true,
 		},
+		phone: {
+			type: String,
+			max: 10,
+		},
 		password: {
 			type: String,
 		},
@@ -29,7 +33,21 @@ const userSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-userSchema.pre;
+userSchema.pre("save", async (next) => {
+	const user = this;
+	if (user.isModified("password")) {
+		user.password = await bycrpt.hash(
+			user.password,
+			process.env.PASSWORD_SALT
+		);
+	}
+	next();
+});
+
+userSchema.methods.toJSON = function () {
+	const user = this;
+	return user;
+};
 
 const User = new mongoose.model("User", userSchema);
 
