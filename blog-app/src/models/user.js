@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const bycrpt = require;
 
 const userSchema = new mongoose.Schema(
 	{
@@ -26,6 +28,8 @@ const userSchema = new mongoose.Schema(
 	},
 	{ timestamps: true }
 );
+
+userSchema.pre;
 
 const User = new mongoose.model("User", userSchema);
 
