@@ -65,15 +65,18 @@ userSchema.statics.login = async (email, password) => {
 
 userSchema.methods.generateJWT = function () {
 	const user = this;
-	const token = jwt.sign(
-		{ _id: user._id.toString() },
-		process.env.JWT_SIGNATURE,
-		{
-			algorithm: "RS512",
-			expiresIn: process.env.JWT_EXPIRE,
-		}
-	);
-	return token;
+	try {
+		const token = jwt.sign(
+			{ _id: user._id.toString() },
+			process.env.JWT_SIGNATURE,
+			{
+				expiresIn: process.env.JWT_EXPIRE,
+			}
+		);
+		return token;
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 const User = new mongoose.model("User", userSchema);
