@@ -12,4 +12,13 @@ router.post("/tags", async (req, res) => {
 	}
 });
 
+router.get("/tags/all", async (req, res) => {
+	try {
+		const tags = await Tag.find({});
+		res.send(tags);
+	} catch (error) {
+		res.status(500).send();
+	}
+});
+
 module.exports = router;
