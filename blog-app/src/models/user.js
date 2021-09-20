@@ -39,7 +39,7 @@ userSchema.pre("save", async function (next) {
 	if (user.isModified("password")) {
 		user.password = await bycrpt.hash(
 			user.password,
-			process.env.PASSWORD_SALT
+			parseInt(process.env.PASSWORD_SALT)
 		);
 	}
 	next();
