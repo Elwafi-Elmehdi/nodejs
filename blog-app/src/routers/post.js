@@ -2,6 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const Post = require("../models/post");
 const auth = require("../middleware/auth");
+const mongoose = require("mongoose");
 
 router.post("/posts", auth, async (req, res) => {
 	try {
@@ -13,12 +14,14 @@ router.post("/posts", auth, async (req, res) => {
 	}
 });
 
-router.get("/posts/all",auth,async (req,res) => {
+router.get("/posts/all", auth, async (req, res) => {
 	try {
-		const 
+		const id = req.user._id;
+		const posts = await Post.find({ owner: id });
+		return res.send(posts);
 	} catch (error) {
-		
+		res.status(500).send();
 	}
-})
+});
 
 module.exports = router;
