@@ -21,4 +21,14 @@ router.get("/tags/all", async (req, res) => {
 	}
 });
 
+router.delete("/tags/:title", async (req, res) => {
+	try {
+		const title = req.params.title;
+		const tag = await Tag.deleteOne({ title });
+		res.send(tag);
+	} catch (error) {
+		res.status(500).send();
+	}
+});
+
 module.exports = router;
