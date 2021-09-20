@@ -7,6 +7,10 @@ const auth = async (req, res, next) => {
 		if (!token) {
 			throw new Error("UNAUTHENTICATED");
 		}
+		const decoded = jwt.verify(token, process.env.JWT_SIGNATURE);
+		const user = await User.findOne({ _id: decoded._id });
+		req.user = user;
+		req.token = token;
 		next();
 	} catch (error) {
 		return res.status(401).send({ error });
