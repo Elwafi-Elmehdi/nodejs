@@ -52,6 +52,19 @@ userSchema.methods.toJSON = function () {
 	return vo;
 };
 
+userSchema.methods.generateJWT = function () {
+	const user = this;
+	const token = jwt.sign(
+		{ _id: user._id.toString() },
+		process.env.JWT_SIGNATURE,
+		{
+			algorithm: process.env.JWT_ALGO,
+			expiresIn: process.env.JWT_EXPIRE,
+		}
+	);
+	return token;
+};
+
 const User = new mongoose.model("User", userSchema);
 
 module.exports = User;
