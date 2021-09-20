@@ -51,6 +51,17 @@ userSchema.methods.toJSON = function () {
 	delete vo.password;
 	return vo;
 };
+userSchema.statics.login = async (email, password) => {
+	const user = await User.findOne({ email });
+	if (!user) {
+		throw new Error("User not found");
+	}
+	const isMatch = bycrpt.compare(password, user.password);
+	if (!isMatch) {
+		throw new Error("Bad Credentials");
+	}
+	return user;
+};
 
 userSchema.methods.generateJWT = function () {
 	const user = this;

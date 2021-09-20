@@ -17,6 +17,9 @@ router.post("/users", async (req, res) => {
 	}
 });
 
-router.post("/users/login", async (req, res) => {});
+router.post("/users/login", async (req, res) => {
+	try {
+	} catch (error) {}
+});
 
 module.exports = router;
