@@ -69,7 +69,7 @@ userSchema.methods.generateJWT = function () {
 		{ _id: user._id.toString() },
 		process.env.JWT_SIGNATURE,
 		{
-			algorithm: process.env.JWT_ALGO,
+			algorithm: "RS512",
 			expiresIn: process.env.JWT_EXPIRE,
 		}
 	);

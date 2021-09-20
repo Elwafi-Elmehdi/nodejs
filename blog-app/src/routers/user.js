@@ -19,7 +19,16 @@ router.post("/users", async (req, res) => {
 
 router.post("/users/login", async (req, res) => {
 	try {
-	} catch (error) {}
+		const { email, password } = req.body;
+		if (!email || !password) {
+			return res.status(400).send();
+		}
+		const user = await User.login(email, password);
+		const token = user.generateJWT();
+		res.send({ user, token });
+	} catch (error) {
+		res.status(500).send({ error: error.message });
+	}
 });
 
 module.exports = router;
