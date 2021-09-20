@@ -5,9 +5,9 @@ const auth = require("../middleware/auth");
 
 router.post("/posts", auth, async (req, res) => {
 	try {
-		const task = new Post({ ...req.body });
-		await task.save();
-		res.send(task);
+		const post = new Post({ ...req.body, owner: req.user._id });
+		await post.save();
+		res.send(post);
 	} catch (error) {
 		res.send({ error });
 	}

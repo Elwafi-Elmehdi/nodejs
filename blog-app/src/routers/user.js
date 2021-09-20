@@ -4,8 +4,7 @@ const auth = require("../middleware/auth");
 const router = new express.Router();
 
 router.get("/", auth, (req, res) => {
-	console.log(req.ip);
-	res.send("Hello, World!");
+	return res.send({ user: req.user, token: req.token });
 });
 
 router.post("/users", async (req, res) => {

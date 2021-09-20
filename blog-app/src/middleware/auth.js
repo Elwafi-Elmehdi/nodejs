@@ -13,7 +13,7 @@ const auth = async (req, res, next) => {
 		req.token = token;
 		next();
 	} catch (error) {
-		return res.status(401).send({ error });
+		return res.status(401).send({ error: error.message });
 	}
 };
 
