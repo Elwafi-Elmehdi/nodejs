@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, ObjectId } = require("mongoose");
 
 const commentSchema = new Schema(
 	{
@@ -8,6 +8,10 @@ const commentSchema = new Schema(
 		content: {
 			required: true,
 			type: String,
+		},
+		owner: {
+			required: true,
+			type: ObjectId,
 		},
 	},
 	{ timestamps: true }
