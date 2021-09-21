@@ -15,6 +15,16 @@ router.get("/users/me", auth, async (req, res) => {
 	}
 });
 
+router.delete("/users/me", auth, async (req, res) => {
+	try {
+		const user = req.user;
+		await user.delete();
+		res.send(user);
+	} catch (error) {
+		res.status(401).send();
+	}
+});
+
 router.post("/users", async (req, res) => {
 	try {
 		const user = new User({ ...req.body });
