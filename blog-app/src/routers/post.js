@@ -26,6 +26,15 @@ router.get("/posts/:id", auth, async (req, res) => {
 	}
 });
 
+router.get("/posts", async (req, res) => {
+	try {
+		const posts = Post.find({});
+		res.send(posts);
+	} catch (error) {
+		res.status(500).send();
+	}
+});
+
 router.get("/posts/all", auth, async (req, res) => {
 	try {
 		const id = req.user._id;
