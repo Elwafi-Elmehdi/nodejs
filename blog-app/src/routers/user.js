@@ -7,6 +7,14 @@ router.get("/", auth, (req, res) => {
 	return res.send({ user: req.user, token: req.token });
 });
 
+router.get("/users/me", auth, async (req, res) => {
+	try {
+		res.send(req.user);
+	} catch (error) {
+		res.status(401).send();
+	}
+});
+
 router.post("/users", async (req, res) => {
 	try {
 		const user = new User({ ...req.body });

@@ -26,9 +26,22 @@ router.get("/posts/:id", auth, async (req, res) => {
 	}
 });
 
+router.delete("/posts/:id", auth, async (req, res) => {
+	try {
+		const id = req.params.id;
+		if (!id) {
+			return res.status(400).send({ error: "user error" });
+		}
+		const post = await Post.deleteOne({ _id: id, owner: req.user._id });
+		res.send(post);
+	} catch (error) {
+		res.status(500).send();
+	}
+});
+
 router.get("/posts", async (req, res) => {
 	try {
-		const posts = Post.find({});
+		const posts = await Post.find({});
 		res.send(posts);
 	} catch (error) {
 		res.status(500).send();
