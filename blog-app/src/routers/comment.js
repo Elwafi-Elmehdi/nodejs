@@ -15,12 +15,15 @@ router.get("/comments/post/:id", async (req, res) => {
 	}
 });
 
-router.post("/comments/post/:id", async (req, res) => {
+router.post("/comments/post/:id", auth, async (req, res) => {
 	try {
 		const id = req.params.id;
 		if (!id) {
 			return res.status(400).send();
 		}
+		const comment = Comment({ ...req.body, owner: req.user._id, post: id });
+		await comment.save();
+		res.send(comment);
 	} catch (error) {
 		res.status(500).send();
 	}
