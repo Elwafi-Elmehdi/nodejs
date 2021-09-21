@@ -13,7 +13,9 @@ const auth = async (req, res, next) => {
 		req.token = token;
 		next();
 	} catch (error) {
-		return res.status(401).send({ error: error.message });
+		return res
+			.status(401)
+			.send({ error: "unauthenticated, please login!" });
 	}
 };
 

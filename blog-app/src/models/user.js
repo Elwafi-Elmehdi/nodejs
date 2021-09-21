@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bycrpt = require("bcryptjs");
+const Post = require("../models/post");
 
 const userSchema = new mongoose.Schema(
 	{
@@ -51,12 +52,19 @@ userSchema.pre("save", async function (next) {
 	next();
 });
 
+userSchema.pre("remove", async function (next) {
+	const user = this;
+	const isRemoved = await Post.deleteMany({ owner: user._id });
+	next();
+});
+
 userSchema.methods.toJSON = function () {
 	const user = this;
 	const vo = user.toObject();
 	delete vo.password;
 	return vo;
 };
+
 userSchema.statics.login = async (email, password) => {
 	const user = await User.findOne({ email });
 	if (!user) {
