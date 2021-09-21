@@ -13,6 +13,11 @@ const commentSchema = new Schema(
 			required: true,
 			type: ObjectId,
 		},
+
+		post: {
+			required: true,
+			type: ObjectId,
+		},
 	},
 	{ timestamps: true }
 );
