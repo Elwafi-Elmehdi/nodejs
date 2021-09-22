@@ -1,4 +1,4 @@
-const { ObjectId } = require("mongoose");
+const mongoose = require("mongoose");
 
 // Models
 const Post = require("../../src/models/post");
@@ -7,7 +7,7 @@ const Category = require("../../src/models/category");
 const Comment = require("../../src/models/comment");
 const Tag = require("../../src/models/tag");
 
-const userOneId = new ObjectId();
+const userOneId = mongoose.Types.ObjectId();
 
 const userOne = {
 	_id: userOneId,
@@ -50,4 +50,15 @@ const initDB = async () => {
 
 	await Tag.save(tagOne);
 	await Tag.save(tagTow);
+};
+
+const tags = [tagOne, tagTow];
+const categories = [categoryOne, categoryTwo];
+
+module.exports = {
+	initDB,
+	tags,
+	userOneId,
+	userOne,
+	categories,
 };
