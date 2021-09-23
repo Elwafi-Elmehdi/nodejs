@@ -24,9 +24,9 @@ const postSchema = new mongoose.Schema(
 );
 
 postSchema.virtual("comments", {
-	ref: "Task",
+	ref: "Comment",
 	localField: "_id",
-	foreignField: "owner",
+	foreignField: "post",
 });
 
 const Post = new mongoose.model("Post", postSchema);

@@ -50,12 +50,13 @@ router.get("/posts", async (req, res) => {
 
 router.get("/posts/all", auth, async (req, res) => {
 	try {
-		const id = req.user._id;
-		const posts = await Post.find({ owner: id });
-		// const posts = req.user.populate("tasks");
-		return res.send(posts);
+		// const id = req.user._id;
+		// const posts = await Post.find({ owner: id });
+		await req.user.populate("posts").execPopulate();
+		res.send(user.posts);
 	} catch (error) {
-		res.status(500).send();
+		console.error(error);
+		res.status(502).send({});
 	}
 });
 
