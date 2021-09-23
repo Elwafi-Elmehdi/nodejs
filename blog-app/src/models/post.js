@@ -12,6 +12,9 @@ const postSchema = new mongoose.Schema(
 		content: {
 			type: String,
 		},
+		category: {
+			type: mongoose.Types.ObjectId,
+		},
 		owner: {
 			required: true,
 			type: mongoose.Types.ObjectId,
