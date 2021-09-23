@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { schema } = require("../models/tag");
+const { schema, Tag } = require("../models/tag");
 const { categorySchema, Category } = require("../models/category");
 
 const postSchema = new mongoose.Schema(
@@ -32,7 +32,14 @@ postSchema.virtual("comments", {
 
 postSchema.pre("save", async function (next) {
 	const post = this;
+
+	const tags = post.tags.map(async (elem) => {
+		return await Tag.findOne({ title: elem.title });
+	});
+
 	const category = await Category.findOne({ title: post.category.title });
+
+	post.tags = tags;
 	post.category = category;
 	next();
 });
