@@ -57,8 +57,8 @@ const categories = [categoryOne, categoryTwo];
 
 module.exports = {
 	initDB,
-	tags,
 	userOneId,
 	userOne,
 	categories,
+	tags,
 };

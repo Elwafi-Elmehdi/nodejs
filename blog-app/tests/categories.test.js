@@ -5,5 +5,5 @@ beforeEach(initDB);
 
 test("Should get categories from db", async () => {
 	const categories = await Category.find({});
-	expect(categories).toBeInstanceOf(Array);
+	expect(categories).not.toBeNull();
 });

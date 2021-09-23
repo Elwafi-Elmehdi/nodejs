@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "env-cmd -f ./src/config/dev.env nodemon index.js",
-    "test": "env-cmd -f ./src/config/test.env  jest --watchAll --verbose --coverage"
+    "test": "env-cmd -f ./src/config/test.env  jest --config=jest.config.js"
   },
   "keywords": [],
   "author": "",
