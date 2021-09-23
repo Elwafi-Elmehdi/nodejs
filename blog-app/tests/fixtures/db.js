@@ -38,18 +38,18 @@ const categoryTwo = {
 };
 
 const initDB = async () => {
-	await User.deleteMany({});
-	await Post.deleteMany({});
-	await Comment.deleteMany({});
-	await Tag.deleteMany({});
-	await Category.deleteMany({});
+	await User.deleteMany();
+	await Post.deleteMany();
+	await Comment.deleteMany();
+	await Tag.deleteMany();
+	await Category.deleteMany();
 
-	await User.save(userOne);
-	await Category.save(categoryOne);
-	await Category.save(categoryTwo);
+	await new User(userOne).save();
+	await new Category(categoryOne).save();
+	await new Category(categoryTwo).save();
 
-	await Tag.save(tagOne);
-	await Tag.save(tagTow);
+	await new Tag(tagOne).save();
+	await new Tag(tagTow).save();
 };
 
 const tags = [tagOne, tagTow];
