@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const { schema } = require("../models/tag");
+const { categorySchema } = require("../models/category");
 
 const postSchema = new mongoose.Schema(
 	{
@@ -12,9 +14,8 @@ const postSchema = new mongoose.Schema(
 		content: {
 			type: String,
 		},
-		category: {
-			type: mongoose.Types.ObjectId,
-		},
+		category: categorySchema,
+		tags: [schema],
 		owner: {
 			required: true,
 			type: mongoose.Types.ObjectId,
