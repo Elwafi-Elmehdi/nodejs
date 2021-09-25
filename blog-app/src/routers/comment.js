@@ -1,4 +1,5 @@
-const router = new require("express").Router();
+const express = require("express")
+const router = new express.Router();
 const auth = require("../middleware/auth");
 const Comment = require("../models/comment");
 

@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 // Models
 const Post = require("../../src/models/post");
 const User = require("../../src/models/user");
-const Category = require("../../src/models/category");
+const {Category} = require("../../src/models/category");
 const Comment = require("../../src/models/comment");
-const Tag = require("../../src/models/tag");
+const {Tag} = require("../../src/models/tag");
 
 const userOneId = mongoose.Types.ObjectId();
 
