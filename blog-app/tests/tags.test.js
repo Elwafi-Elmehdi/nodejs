@@ -9,7 +9,7 @@ test("Should get all the tags",async () => {
         .get('/tags/all')
         .send()
         .expect(200)
-    expect(response.body).toHaveLength(2)
+    expect(response.body.length).toBe(2)
 })
 
 test("Should get tag with title",async () => {
@@ -17,7 +17,10 @@ test("Should get tag with title",async () => {
         .get('/tags/CSS')
         .send()
         .expect(200);
-    expect(response.body).toEqual(tags[1])
+    console.error(response.body)
+    expect(response.body).toMatchObject({
+        title:tags[1].title
+    })
 })
 
 
