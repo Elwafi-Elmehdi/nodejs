@@ -12,3 +12,12 @@ test("Should get all the tags",async () => {
     expect(response.body).toHaveLength(2)
 })
 
+test("Should get tag with title",async () => {
+    const response = await request(app)
+        .get('/tags/CSS')
+        .send()
+        .expect(200);
+    expect(response.body).toEqual(tags[1])
+})
+
+

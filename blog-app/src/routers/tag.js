@@ -12,6 +12,16 @@ router.post("/tags", async (req, res) => {
 	}
 });
 
+router.get("/tags/:title", async (req, res) => {
+	try {
+		const title = req.params.title;
+		const tag = await Tag.findOne({ title });
+		res.send(tag);
+	} catch (error) {
+		res.status(500).send();
+	}
+});
+
 router.get("/tags/all", async (req, res) => {
 	try {
 		const tags = await Tag.find({});
