@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const bycrpt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 const Post = require("../models/post");
 
 const userSchema = new mongoose.Schema(
@@ -44,7 +44,7 @@ userSchema.virtual("posts", {
 userSchema.pre("save", async function (next) {
 	const user = this;
 	if (user.isModified("password")) {
-		user.password = await bycrpt.hash(
+		user.password = await bcrypt.hash(
 			user.password,
 			parseInt(process.env.PASSWORD_SALT)
 		);
@@ -70,7 +70,7 @@ userSchema.statics.login = async (email, password) => {
 	if (!user) {
 		throw new Error("User not found");
 	}
-	const isMatch = bycrpt.compare(password, user.password);
+	const isMatch = bcrypt.compare(password, user.password);
 	if (!isMatch) {
 		throw new Error("Bad Credentials");
 	}

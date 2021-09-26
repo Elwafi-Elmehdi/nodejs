@@ -12,3 +12,5 @@ test("Should get all categories", async () => {
         .expect(200)
     expect(response.body).toHaveLength(2)
 });
+
+test("Should not delete any category")

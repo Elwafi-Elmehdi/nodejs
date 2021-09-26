@@ -12,7 +12,7 @@ const userOneId = mongoose.Types.ObjectId();
 const userOne = {
 	_id: userOneId,
 	age: 22,
-	email: "bobobosoqgoog@mehdi.dev",
+	email: "bobobosoqgoogwadwada@mehdi.dev",
 	password: "Tests$@&",
 	fullname: "Blog Tests",
 };
