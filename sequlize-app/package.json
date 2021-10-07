@@ -5,8 +5,7 @@
   "main": "index.js",
   "private": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "env-cmd -f ./config/secrets.env nodemon index.js"
   },
   "keywords": [],
   "author": "mehdi",
