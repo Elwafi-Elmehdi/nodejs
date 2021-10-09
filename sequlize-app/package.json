@@ -12,7 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "env-cmd": "^10.1.0",
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.13",
+    "sequelize-cli": "^6.2.0"
   },
   "dependencies": {
     "express": "^4.17.1",
