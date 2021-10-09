@@ -20,7 +20,7 @@ router.post("/products", async (req, res) => {
 
 router.get("/products", async (req, res) => {
 	try {
-		const products = await product.find();
+		const products = await product.findAll();
 		res.send(products);
 	} catch (error) {
 		res.status(500).send({ error: error.message });
