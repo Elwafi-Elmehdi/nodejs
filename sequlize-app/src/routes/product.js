@@ -1,5 +1,5 @@
 const express = require("express");
-const { sequelize, Product } = require("../../models/");
+const { sequelize, product } = require("../../models/");
 const router = new express.Router();
 
 router.post("/products", async (req, res) => {
@@ -8,12 +8,14 @@ router.post("/products", async (req, res) => {
 		if (!ref || !category) {
 			throw new Error("Client Input Error");
 		}
-		const product = await Product.create({
+		const producta = await product.create({
 			ref,
 			category,
 		});
-		res.send(product);
+		res.send(producta);
 	} catch (error) {
-		res.status(500).send(error);
+		res.status(500).send({ error: error.message });
 	}
 });
+
+module.exports = router;
