@@ -4,6 +4,6 @@ const { sequelize } = require("./models/index");
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, async () => {
-	await sequelize.sync();
+	await sequelize.sync({ alter: true });
 	console.log("Server running on ", PORT);
 });
