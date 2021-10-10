@@ -55,7 +55,7 @@ router.delete("/products/:ref", async (req, res) => {
 				ref,
 			},
 		});
-		res.send(producta);
+		res.status(producta);
 	} catch (error) {
 		res.status(500).send({ error: error.message });
 	}
