@@ -10,6 +10,7 @@
   "author": "Elmehdi ELWAFI",
   "license": "ISC",
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "nodemon": "^2.0.14"
   },
   "dependencies": {
